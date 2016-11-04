@@ -13,7 +13,7 @@ module.exports = {
 				test: /\.jsx?$/,
 				exlude: /(node_modules)/,
 				query: {
-					presets: ["react"];
+					presets: ["react"]
 				}
 			}
 		]
