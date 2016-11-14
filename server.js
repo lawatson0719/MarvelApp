@@ -43,9 +43,8 @@ app.post("/api/battles", function (req, res) {
 		id: shortid()
 	}
 
+
 	db.get("battles").push(battle).value();
-
-
 
 
 	// Update characters and their win rates
