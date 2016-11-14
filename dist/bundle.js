@@ -45,10 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// TODO
-	// 1. Implement battle function
-	// 2. Battle component
-	// 3. Set up server for battle history
-	// 4. Pull W/L from server into App
+	// 1. Add draw funtionality
 
 
 	var React = __webpack_require__(1);
@@ -21539,6 +21536,10 @@
 		// Makes 'em fight
 
 		fight: function () {
+			if (this.state.characterOne.id === this.state.characterTwo.id) {
+				console.log("YOU CAN'T FIGHT THEY'RE THE SAME");
+				return;
+			}
 			if (this.state.characterOne && this.state.characterTwo) {
 				// battlemanager sometimes doesn't have ID's?
 				var narrative = battleManager.narrativeBattle({ id: this.state.characterOne.id }, { id: this.state.characterTwo.id });
@@ -23803,7 +23804,6 @@
 			url: "/api/battles/",
 			success: function (results) {
 				battleHistory = results;
-				console.log(results);
 			}
 		});
 	};

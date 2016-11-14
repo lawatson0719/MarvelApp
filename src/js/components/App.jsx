@@ -116,6 +116,10 @@ var App = React.createClass({
 	// Makes 'em fight
 
 	fight: function () {
+		if (this.state.characterOne.id === this.state.characterTwo.id) {
+			console.log("YOU CAN'T FIGHT THEY'RE THE SAME");
+			return;
+		}
 		if (this.state.characterOne && this.state.characterTwo) {
 			// battlemanager sometimes doesn't have ID's?
 			var narrative = battleManager.narrativeBattle({id: this.state.characterOne.id}, {id: this.state.characterTwo.id });

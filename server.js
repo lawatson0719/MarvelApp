@@ -33,22 +33,21 @@ app.get("/api/battles", function (req, res) {
 
 app.post("/api/battles", function (req, res) {
 	
+	var fightData = req.body;
 	// Add battle to battle log
 	
-	var fightData = req.body;
-
-	var battle = {
-		winner: fightData.winner.name,
-		loser: fightData.loser.name,
-		id: shortid()
-	}
-
-
-	db.get("battles").push(battle).value();
-
-
-	// Update characters and their win rates
 	if (fightData.winner !== "draw") {
+
+		var battle = {
+			winner: fightData.winner.name,
+			loser: fightData.loser.name,
+			id: shortid()
+		}
+
+		db.get("battles").push(battle).value();
+		
+
+		// Update characters and their win rates
 		var winner = db.get("characters").find({id: fightData.winner.id});
 		if (winner.value()) {
 			winner.assign({
@@ -72,9 +71,15 @@ app.post("/api/battles", function (req, res) {
 			loser.wins = 0;
 			db.get("characters").push(loser).value();
 		}
-	}
-	
+	} else {
+		var battle = {
+			winner: fightData.winner.name,
+			loser: fightData.loser.name,
+			id: shortid()
+		}
 
+		db.get("battles").push(battle).value();
+	}
 
 
 	res.json(battle);
