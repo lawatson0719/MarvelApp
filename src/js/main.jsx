@@ -1,8 +1,5 @@
 // TODO
-// 1. Implement battle function
-// 2. Battle component
-// 3. Set up server for battle history
-// 4. Pull W/L from server into App
+// 1. Add draw funtionality
 
 
 var React = require("react");

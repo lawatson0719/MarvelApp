@@ -30,7 +30,6 @@ battleStore.fetch = function () {
 		url: "/api/battles/",
 		success: function (results) {
 			battleHistory = results;
-			console.log(results);
 		}
 	})
 }
