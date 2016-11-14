@@ -23,6 +23,7 @@ var App = React.createClass({
 
 
 	render: function () {
+		// Load characters if available
 		var leftImage;
 		var rightImage;
 
@@ -38,13 +39,27 @@ var App = React.createClass({
 			rightImage = "";
 		}
 
+
+		// load results if search has been performed
+
 		var results;
 		if (this.state.displayResults) {
 			results = <Results 
 						onChoose={this.onSelect} />;
 		}
+
+
+		// Set state of fight button
+
+		var fightText = "Choose Your Combatants";
+		if (this.state.characterOne && this.state.characterTwo) {
+			fightText = "Fight";
+		}
+
+
+
 		return (
-			<main>
+			<div>
 				<CharacterSelect 
 					image={leftImage}
 					onClick={this.selectLeft} 
@@ -57,39 +72,34 @@ var App = React.createClass({
 					/>
 				<Search character={1} onSearch={this.displayResults} />
 				<div className="results"></div>
-				<button className="fight-button">fight</button>
+				<button className="fight-button" onClick={this.fight}>{fightText}</button>
 				<div className="results"></div>
 				<Search character={2} onSearch={this.displayResults} />
 				{results}
 				<Battle />
-			</main>
+			</div>
 		);
 	},
 
-	selectLeft: function () {
-		this.setState({
-			selectedCharacter: 1
-		})
-	},
-
-	selectRight: function () {
-		this.setState({
-			selectedCharacter: 2
-		})
-	},
+	// Passed as prop into both searches and executed when search occurs
 
 	displayResults: function (which) {
+		// sets the selectedCharacter state to 1 or 2, to prep for loading 
 		this.setState({
 			selectedCharacter: which
 		})
+
+		// Displays the results component now that search has occured
 		this.setState({
 			displayResults: true
 		})
 	},
 
+	// Passed as prop into results --> character
+	// sets selectedCharacter to object in store by id (character that was selected)
+
 	onSelect: function (id) {
 		var character = characterStore.get(id);
-		console.log(character);
 		if (this.state.selectedCharacter === 1) {
 			this.setState({
 				characterOne: character
@@ -98,6 +108,14 @@ var App = React.createClass({
 			this.setState({
 				characterTwo: character
 			})	
+		}
+	},
+
+	// Makes 'em fight
+
+	fight: function () {
+		if (this.state.characterOne && this.state.characterTwo) {
+			console.log("We're fighting!");
 		}
 	}
 

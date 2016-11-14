@@ -11,9 +11,14 @@ var Character = React.createClass({
 		// );
 
 	render: function () {
+		// name
+		// w/l
+		// thumbnail
 		return (
 			<div onClick={this.handleClick}>
+				<img src={this.props.thumb} className="thumb" />
 				{this.props.name}
+				<div></div>
 			</div>
 		);
 	},
