@@ -7,14 +7,16 @@ var bodyParser = require("body-parser");
 
 var app = express();
 var db = lowdb("db.json", {storage: fileAsync});
+var port = 3000;
 
-app.use(bodyParser);
+
+// HANGS??
+app.use(bodyParser.json());	
 
 db.defaults({
 	//Any default collections (arrays	)
 }).value();
 
-var port = 3000;
 
 // __dirname is a string that reference the current directory
 app.use(express.static(__dirname + "/public"));
