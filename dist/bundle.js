@@ -21421,9 +21421,9 @@
 
 	var CharacterSelect = __webpack_require__(173);
 	var Search = __webpack_require__(174);
-	var Battle = __webpack_require__(232);
-	var Results = __webpack_require__(230);
-	var characterStore = __webpack_require__(233);
+	var Battle = __webpack_require__(180);
+	var Results = __webpack_require__(175);
+	var characterStore = __webpack_require__(177);
 
 	var App = React.createClass({
 		displayName: "App",
@@ -21439,6 +21439,21 @@
 		},
 
 		render: function () {
+			var leftImage;
+			var rightImage;
+
+			if (this.state.characterOne) {
+				leftImage = this.state.characterOne.thumbnail.path + "." + this.state.characterOne.thumbnail.extension;
+			} else {
+				leftImage = "";
+			}
+
+			if (this.state.characterTwo) {
+				rightImage = this.state.characterTwo.thumbnail.path + "." + this.state.characterTwo.thumbnail.extension;
+			} else {
+				rightImage = "";
+			}
+
 			var results;
 			if (this.state.displayResults) {
 				results = React.createElement(Results, {
@@ -21448,10 +21463,12 @@
 				"main",
 				null,
 				React.createElement(CharacterSelect, {
+					image: leftImage,
 					onClick: this.selectLeft,
 					selected: this.selectedCharacter === 1 ? true : false
 				}),
 				React.createElement(CharacterSelect, {
+					image: rightImage,
 					onClick: this.selectRight,
 					selected: this.selectedCharacter === 2 ? true : false
 				}),
@@ -21498,7 +21515,6 @@
 					characterTwo: character
 				});
 			}
-			console.log(this.state);
 		}
 
 	});
@@ -21515,13 +21531,19 @@
 		displayName: "CharacterSelect",
 
 
-		//        PROPS
-		//           onClick={this.selectLeft} 
-		//    	 	 selected={this.selectedCharacter === 1 ? true : false}
+		// <CharacterSelect 
+		// image={leftImage}
+		// onClick={this.selectLeft} 
+		// selected={this.selectedCharacter === 1 ? true : false}
+		// />
 
 
 		render: function () {
-			return React.createElement("div", null);
+			return React.createElement(
+				"div",
+				null,
+				React.createElement("img", { src: this.props.image })
+			);
 		}
 	});
 
@@ -21533,8 +21555,8 @@
 
 	var React = __webpack_require__(1);
 
-	var Results = __webpack_require__(230);
-	var characterStore = __webpack_require__(233);
+	var Results = __webpack_require__(175);
+	var characterStore = __webpack_require__(177);
 
 	var Search = React.createClass({
 		displayName: "Search",
@@ -21584,68 +21606,13 @@
 	module.exports = Search;
 
 /***/ },
-/* 175 */,
-/* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */,
-/* 180 */,
-/* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 
-	var Character = __webpack_require__(231);
-	var characterStore = __webpack_require__(233);
+	var Character = __webpack_require__(176);
+	var characterStore = __webpack_require__(177);
 
 	var Results = React.createClass({
 		displayName: "Results",
@@ -21690,7 +21657,7 @@
 	module.exports = Results;
 
 /***/ },
-/* 231 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -21722,28 +21689,11 @@
 	module.exports = Character;
 
 /***/ },
-/* 232 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
-
-	var Battle = React.createClass({
-		displayName: "Battle",
-
-
-		render: function () {
-			return React.createElement("div", null);
-		}
-	});
-
-	module.exports = Battle;
-
-/***/ },
-/* 233 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var EventEmitter = __webpack_require__(234);
-	var $ = __webpack_require__(235);
+	var EventEmitter = __webpack_require__(178);
+	var $ = __webpack_require__(179);
 
 	var characterStore = Object.create(EventEmitter.prototype);
 	EventEmitter.apply(characterStore);
@@ -21775,7 +21725,7 @@
 	module.exports = characterStore;
 
 /***/ },
-/* 234 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22084,7 +22034,7 @@
 	}
 
 /***/ },
-/* 235 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -23732,6 +23682,23 @@
 	// (#7102#comment:10, https://github.com/jquery/jquery/pull/557)
 	// and CommonJS for browser emulators (#13566)
 	if(!noGlobal){window.jQuery=window.$=jQuery;}return jQuery;});
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+	var Battle = React.createClass({
+		displayName: "Battle",
+
+
+		render: function () {
+			return React.createElement("div", null);
+		}
+	});
+
+	module.exports = Battle;
 
 /***/ }
 /******/ ]);

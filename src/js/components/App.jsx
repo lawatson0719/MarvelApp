@@ -23,6 +23,21 @@ var App = React.createClass({
 
 
 	render: function () {
+		var leftImage;
+		var rightImage;
+
+		if (this.state.characterOne) {
+			leftImage = this.state.characterOne.thumbnail.path + "." + this.state.characterOne.thumbnail.extension;
+		} else {
+			leftImage = "";
+		}
+
+		if (this.state.characterTwo) {
+			rightImage = this.state.characterTwo.thumbnail.path + "." + this.state.characterTwo.thumbnail.extension;
+		} else {
+			rightImage = "";
+		}
+
 		var results;
 		if (this.state.displayResults) {
 			results = <Results 
@@ -31,10 +46,12 @@ var App = React.createClass({
 		return (
 			<main>
 				<CharacterSelect 
+					image={leftImage}
 					onClick={this.selectLeft} 
 					selected={this.selectedCharacter === 1 ? true : false}
 					/>
 				<CharacterSelect 
+					image={rightImage}
 					onClick={this.selectRight} 
 					selected={this.selectedCharacter === 2 ? true : false}
 					/>
@@ -82,7 +99,6 @@ var App = React.createClass({
 				characterTwo: character
 			})	
 		}
-		console.log(this.state);
 	}
 
 });
