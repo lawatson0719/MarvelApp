@@ -21715,8 +21715,12 @@
 			return React.createElement(
 				"li",
 				{ onClick: this.handleClick },
+				React.createElement(
+					"div",
+					{ className: "char-name" },
+					this.props.name
+				),
 				React.createElement("img", { src: this.props.thumb, className: "thumb" }),
-				this.props.name,
 				React.createElement(
 					"div",
 					null,

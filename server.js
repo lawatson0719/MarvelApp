@@ -9,7 +9,7 @@ var app = express();
 var db = lowdb("db.json", {storage: fileAsync});
 var port = 3000;
 
-app.use(bodyParser());	
+app.use(bodyParser({limit:'50mb'}));	
 
 
 
@@ -22,10 +22,7 @@ app.use(express.static(__dirname + "/lib"));
 app.use(express.static(__dirname + "/src/css"));
 
 db.defaults({
-	battles: {
-		history: [],
-		count: 0
-	},
+	battles: [],
 	characters: []
 }).value();
 
@@ -37,6 +34,7 @@ app.get("/api/battles", function (req, res) {
 app.post("/api/battles", function (req, res) {
 	
 	// Add battle to battle log
+	
 	var fightData = req.body;
 
 	var battle = {
@@ -44,42 +42,41 @@ app.post("/api/battles", function (req, res) {
 		loser: fightData.loser.name,
 		id: shortid()
 	}
-	db.get("battles")push(battle).value();
+
+	db.get("battles").push(battle).value();
+
+
+
 
 	// Update characters and their win rates
+	if (fightData.winner !== "draw") {
+		var winner = db.get("characters").find({id: fightData.winner.id});
+		if (winner.value()) {
+			winner.assign({
+				wins: winner.value().wins + 1
+			}).value();
+		} else {
+			winner = fightData.winner;
+			winner.wins = 1;
+			winner.losses = 0;
+			db.get("characters").push(winner).value();
+		}
 
-
-    // if (animal.value()) {
-    //     animal.assign({
-    //         name: name,
-    //         species: species
-    //     }).value();
-    //     res.json(animal); // status code automatically set to 200
-    //     return;
-    // }
-	var winner = db.get("characters").find({id: fightData.winner.id});
-	if (winner.value()) {
-		winner.assign({
-			wins: winner.value().wins + 1
-		}).value();
-	} else {
-		winner = fightData.winner;
-		winner.wins = 1;
-		winner.losses = 0;
-		db.get("characters").push(winner).value();
+		var loser = db.get("characters").find({id: fightData.loser.id});
+		if (loser.value()) {
+			loser.assign({
+				losses: loser.value().losses + 1
+			}).value();
+		} else {
+			loser = fightData.loser;
+			loser.losses = 1;
+			loser.wins = 0;
+			db.get("characters").push(loser).value();
+		}
 	}
+	
 
-	var loser = db.get("characters").find({id: fightData.loser.id});
-	if (loser.value()) {
-		loser.assign({
-			losses: loser.value().losses + 1
-		}).value();
-	} else {
-		loser = fightData.loser;
-		loser.losses = 1;
-		loser.wins = 0;
-		db.get("characters").push(loser).value();
-	}
+
 
 	res.json(battle);
 })
