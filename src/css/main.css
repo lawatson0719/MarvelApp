@@ -1,3 +1,6 @@
+/* --- GENERAL STYLES --- */
+
+
 *, *:before, *:after {
 	box-sizing: border-box;
 }
@@ -11,6 +14,10 @@
 body {
 	background-image: url('../../Images/triangles/triangles.png')
 }
+
+
+/* --- HEADER --- */
+
 
 header {
 	height: 160px;
@@ -61,3 +68,11 @@ header {
 	border: 8px solid #000;
 	height: 100%;
 }
+
+/* --- Thumbnails --- */
+
+.results {
+	width: 50px;
+	height: 50px;
+}
+
