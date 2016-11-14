@@ -21714,7 +21714,7 @@
 			// thumbnail
 			return React.createElement(
 				"li",
-				{ onClick: this.handleClick },
+				{ className: "char-list", onClick: this.handleClick },
 				React.createElement(
 					"div",
 					{ className: "char-name" },
@@ -21723,7 +21723,7 @@
 				React.createElement("img", { src: this.props.thumb, className: "thumb" }),
 				React.createElement(
 					"div",
-					null,
+					{ className: "score" },
 					"W/L"
 				)
 			);
