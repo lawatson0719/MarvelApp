@@ -76,6 +76,7 @@ var App = React.createClass({
 				<div className="results"></div>
 				<Search character={2} onSearch={this.displayResults} />
 				{results}
+
 				<Battle narrative={this.state.narrative}/>
 			</div>
 		);
