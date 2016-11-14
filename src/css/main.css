@@ -1,1 +1,63 @@
-	
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+.cf:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+body {
+	background-image: url('../../Images/triangles/triangles.png')
+}
+
+header {
+	height: 160px;
+	width: 98%;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+#title,
+#logo {
+	float: left;
+	/*display: inline-block;*/
+	/*	height: 100%;*/
+}	
+
+#title {
+	height: 130px;
+	line-height: 130px;
+	width: 73%;
+	font-size: 48px;
+	padding-left: 265px;
+	text-transform: uppercase;
+	border: 5px solid #000;
+	border-left: none;
+	margin: 15px 0;
+	display: block;
+	position: relative;
+	background-position: center;
+	background-color: rgba(248, 230, 216, 0.30)
+}
+
+#title:before {
+	content: "";
+	background-image: url('../../Images/marvel-characters.jpg');
+	position: absolute;
+	opacity: 0.5;
+	z-index: -1;
+	background-position: center;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	filter: opacity(60%);
+}
+
+
+#logo {
+	border: 8px solid #000;
+	height: 100%;
+}

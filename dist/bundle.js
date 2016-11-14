@@ -21460,7 +21460,7 @@
 					onChoose: this.onSelect });
 			}
 			return React.createElement(
-				"main",
+				"div",
 				null,
 				React.createElement(CharacterSelect, {
 					image: leftImage,

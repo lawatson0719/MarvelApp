@@ -44,7 +44,7 @@ var App = React.createClass({
 						onChoose={this.onSelect} />;
 		}
 		return (
-			<main>
+			<div>
 				<CharacterSelect 
 					image={leftImage}
 					onClick={this.selectLeft} 
@@ -62,7 +62,7 @@ var App = React.createClass({
 				<Search character={2} onSearch={this.displayResults} />
 				{results}
 				<Battle />
-			</main>
+			</div>
 		);
 	},
 
