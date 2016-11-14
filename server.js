@@ -9,8 +9,6 @@ var app = express();
 var db = lowdb("db.json", {storage: fileAsync});
 var port = 3000;
 
-
-// HANGS??
 app.use(bodyParser.json());	
 
 db.defaults({
