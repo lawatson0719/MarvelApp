@@ -6,7 +6,7 @@ var Search = require("./Search.jsx");
 var Battle = require("./Battle.jsx");
 var Results = require("./Results.jsx");
 var characterStore = require("../stores/characterStore.js");
-
+var battleManager = require("battlemanager");
 
 
 var App = React.createClass({
@@ -17,13 +17,15 @@ var App = React.createClass({
 			selectedCharacter: null,
 			displayResults: false,
 			characterOne: null,
-			characterTwo: null
+			characterTwo: null,
+			narrative: null
 		}
 	},
 
 
 	render: function () {
 		// Load characters if available
+
 		var leftImage;
 		var rightImage;
 
@@ -62,12 +64,10 @@ var App = React.createClass({
 			<div>
 				<CharacterSelect 
 					image={leftImage}
-					onClick={this.selectLeft} 
 					selected={this.selectedCharacter === 1 ? true : false}
 					/>
 				<CharacterSelect 
 					image={rightImage}
-					onClick={this.selectRight} 
 					selected={this.selectedCharacter === 2 ? true : false}
 					/>
 				<Search character={1} onSearch={this.displayResults} />
@@ -76,7 +76,7 @@ var App = React.createClass({
 				<div className="results"></div>
 				<Search character={2} onSearch={this.displayResults} />
 				{results}
-				<Battle />
+				<Battle narrative={this.state.narrative}/>
 			</div>
 		);
 	},
@@ -115,7 +115,12 @@ var App = React.createClass({
 
 	fight: function () {
 		if (this.state.characterOne && this.state.characterTwo) {
-			console.log("We're fighting!");
+			// battlemanager sometimes doesn't have ID's?
+			var narrative = battleManager.narrativeBattle({id: this.state.characterOne.id}, {id: this.state.characterTwo.id });
+			this.setState({
+				narrative: narrative,
+				displayResults: false
+			})
 		}
 	}
 

@@ -1,9 +1,8 @@
 // TODO
 // 1. Implement battle function
 // 2. Battle component
-// 3. Display all relevant character information
-// 4. Set up server for battle history
-// 5. Pull W/L from server into App
+// 3. Set up server for battle history
+// 4. Pull W/L from server into App
 
 
 var React = require("react");

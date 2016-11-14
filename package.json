@@ -17,6 +17,7 @@
     "babel-loader": "^6.2.7",
     "babel-preset-react": "^6.16.0",
     "body-parser": "^1.15.2",
+    "battlemanager": "https://github.com/TIY-Columbia-Front-End-Engineering/battlemanager",
     "eventemitter3": "^2.0.2",
     "express": "^4.14.0",
     "jquery": "^3.1.1",
