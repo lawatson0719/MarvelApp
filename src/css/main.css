@@ -76,3 +76,12 @@ header {
 	height: 50px;
 }
 
+.char-name,
+.score {
+	color: #d7d7d7;
+}
+
+.char-list {
+	list-style-type: none;
+}
+
