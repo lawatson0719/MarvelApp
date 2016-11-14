@@ -15,11 +15,11 @@ var Character = React.createClass({
 		// w/l
 		// thumbnail
 		return (
-			<div onClick={this.handleClick}>
+			<li onClick={this.handleClick}>
 				<img src={this.props.thumb} className="thumb" />
 				{this.props.name}
 				<div>W/L</div>
-			</div>
+			</li>
 		);
 	},
 

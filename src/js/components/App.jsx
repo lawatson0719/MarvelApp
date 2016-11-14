@@ -6,6 +6,7 @@ var Search = require("./Search.jsx");
 var Battle = require("./Battle.jsx");
 var Results = require("./Results.jsx");
 var characterStore = require("../stores/characterStore.js");
+var battleStore = require("../stores/battleStore.js");
 var battleManager = require("battlemanager");
 
 
@@ -121,6 +122,8 @@ var App = React.createClass({
 				narrative: narrative,
 				displayResults: false
 			})
+			// Add battle log to battleStore
+			battleStore.add(narrative);
 		}
 	}
 

@@ -38,9 +38,9 @@ var Results = React.createClass({
 
 
 		return (
-			<div>
+			<ul>
 				{characters}
-			</div>
+			</ul>
 		);
 	}
 });
