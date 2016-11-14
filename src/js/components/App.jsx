@@ -57,7 +57,7 @@ var App = React.createClass({
 					/>
 				<Search character={1} onSearch={this.displayResults} />
 				<div className="results"></div>
-				<button className="fight-button"></button>
+				<button className="fight-button">fight</button>
 				<div className="results"></div>
 				<Search character={2} onSearch={this.displayResults} />
 				{results}

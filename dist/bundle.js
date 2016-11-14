@@ -21474,7 +21474,11 @@
 				}),
 				React.createElement(Search, { character: 1, onSearch: this.displayResults }),
 				React.createElement("div", { className: "results" }),
-				React.createElement("button", { className: "fight-button" }),
+				React.createElement(
+					"button",
+					{ className: "fight-button" },
+					"fight"
+				),
 				React.createElement("div", { className: "results" }),
 				React.createElement(Search, { character: 2, onSearch: this.displayResults }),
 				results,
