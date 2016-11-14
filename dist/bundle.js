@@ -21439,6 +21439,21 @@
 		},
 
 		render: function () {
+			var leftImage;
+			var rightImage;
+
+			if (this.state.characterOne) {
+				leftImage = this.state.characterOne.thumbnail.path + "." + this.state.characterOne.thumbnail.extension;
+			} else {
+				leftImage = "";
+			}
+
+			if (this.state.characterTwo) {
+				rightImage = this.state.characterTwo.thumbnail.path + "." + this.state.characterTwo.thumbnail.extension;
+			} else {
+				rightImage = "";
+			}
+
 			var results;
 			if (this.state.displayResults) {
 				results = React.createElement(Results, {
@@ -21448,10 +21463,12 @@
 				"main",
 				null,
 				React.createElement(CharacterSelect, {
+					image: leftImage,
 					onClick: this.selectLeft,
 					selected: this.selectedCharacter === 1 ? true : false
 				}),
 				React.createElement(CharacterSelect, {
+					image: rightImage,
 					onClick: this.selectRight,
 					selected: this.selectedCharacter === 2 ? true : false
 				}),
@@ -21498,7 +21515,6 @@
 					characterTwo: character
 				});
 			}
-			console.log(this.state);
 		}
 
 	});
@@ -21515,13 +21531,19 @@
 		displayName: "CharacterSelect",
 
 
-		//        PROPS
-		//           onClick={this.selectLeft} 
-		//    	 	 selected={this.selectedCharacter === 1 ? true : false}
+		// <CharacterSelect 
+		// image={leftImage}
+		// onClick={this.selectLeft} 
+		// selected={this.selectedCharacter === 1 ? true : false}
+		// />
 
 
 		render: function () {
-			return React.createElement("div", null);
+			return React.createElement(
+				"div",
+				null,
+				React.createElement("img", { src: this.props.image })
+			);
 		}
 	});
 
