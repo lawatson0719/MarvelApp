@@ -74,6 +74,7 @@ var App = React.createClass({
 		var character = characterStore.get(id);
 		console.log(character);
 		if (this.state.selectedCharacter === 1) {
+			console.log("yo");
 			this.setState({
 				characterOne: character
 			})
