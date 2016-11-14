@@ -7,8 +7,12 @@ EventEmitter.apply(characterStore);
 var apiKey = "dcbc47e11153905633e8b3d927ab2639";
 var characters = [];
 
-characterStore.get = function () {
-	return characters;
+characterStore.get = function (id) {
+	if (id) {
+		return characters.find((character) => character.id === id);
+	} else {
+		return characters;
+	}
 }
 
 characterStore.fetch = function (search) {

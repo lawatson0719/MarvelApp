@@ -4,6 +4,9 @@ var Character = require("./Character.jsx");
 var characterStore = require("../stores/characterStore");
 
 var Results = React.createClass({
+		
+		// results = <Results 
+		// 		onSelect={this.onSelect}/>;
 	
 	getInitialState: function () {
 		return {
@@ -21,11 +24,14 @@ var Results = React.createClass({
 	},
 
 	render: function () {
+		var _this = this;
 		var characters = this.state.searchResults.map(function (character) {
 			return ( 
 				<Character
 				name={character.name}
-				key={character.id}/>
+				key={character.id}
+				id={character.id}
+				onChoose={_this.props.onChoose} />
 				);
 		})
 

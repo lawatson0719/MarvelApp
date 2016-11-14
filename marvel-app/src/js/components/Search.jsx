@@ -6,6 +6,11 @@ var characterStore = require("../stores/characterStore.js");
 
 var Search = React.createClass({
 	
+	// <Search 
+			// side="left"
+			// onSearch={this.displayResults} />
+
+
 	getInitialState: function () {
 		return {
 			searchValue : ""
@@ -21,7 +26,6 @@ var Search = React.createClass({
 					onChange={this.onChange} 
 					onKeyDown={this.onKey}
 					value={this.state.searchValue} />
-			<Results />
 			</div>
 		);
 	},
@@ -39,6 +43,7 @@ var Search = React.createClass({
 				searchValue: ""
 			})
 		}
+		this.props.onSearch(this.props.character);
 	}
 });
 

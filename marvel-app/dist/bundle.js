@@ -21422,6 +21422,7 @@
 	var CharacterSelect = __webpack_require__(173);
 	var Search = __webpack_require__(174);
 	var Battle = __webpack_require__(180);
+	var Results = __webpack_require__(175);
 	var characterStore = __webpack_require__(177);
 
 	var App = React.createClass({
@@ -21431,35 +21432,36 @@
 		getInitialState: function () {
 			return {
 				selectedCharacter: null,
-				displayResults: false
+				displayResults: false,
+				characterOne: null,
+				characterTwo: null
 			};
 		},
 
 		render: function () {
 			var results;
 			if (this.state.displayResults) {
-				results = React.createElement(Results, null);
+				results = React.createElement(Results, {
+					onChoose: this.onSelect });
 			}
 			return React.createElement(
-				"div",
+				"main",
 				null,
-				React.createElement("header", null),
-				React.createElement(
-					"main",
-					null,
-					React.createElement(CharacterSelect, {
-						onClick: this.selectLeft,
-						selected: this.selectedCharacter === 1 ? true : false
-					}),
-					React.createElement(CharacterSelect, {
-						onClick: this.selectRight,
-						selected: this.selectedCharacter === 2 ? true : false
-					}),
-					React.createElement(Search, { side: "left" }),
-					React.createElement(Search, { side: "right" }),
-					results,
-					React.createElement(Battle, null)
-				)
+				React.createElement(CharacterSelect, {
+					onClick: this.selectLeft,
+					selected: this.selectedCharacter === 1 ? true : false
+				}),
+				React.createElement(CharacterSelect, {
+					onClick: this.selectRight,
+					selected: this.selectedCharacter === 2 ? true : false
+				}),
+				React.createElement(Search, { character: 1, onSearch: this.displayResults }),
+				React.createElement("div", { className: "results" }),
+				React.createElement("button", { className: "fight-button" }),
+				React.createElement("div", { className: "results" }),
+				React.createElement(Search, { character: 2, onSearch: this.displayResults }),
+				results,
+				React.createElement(Battle, null)
 			);
 		},
 
@@ -21473,6 +21475,30 @@
 			this.setState({
 				selectedCharacter: 2
 			});
+		},
+
+		displayResults: function (which) {
+			this.setState({
+				selectedCharacter: which
+			});
+			this.setState({
+				displayResults: true
+			});
+		},
+
+		onSelect: function (id) {
+			var character = characterStore.get(id);
+			console.log(character);
+			if (this.state.selectedCharacter === 1) {
+				this.setState({
+					characterOne: character
+				});
+			} else if (this.state.selectedCharacter === 2) {
+				this.setState({
+					characterTwo: character
+				});
+			}
+			console.log(this.state);
 		}
 
 	});
@@ -21514,6 +21540,11 @@
 		displayName: "Search",
 
 
+		// <Search 
+		// side="left"
+		// onSearch={this.displayResults} />
+
+
 		getInitialState: function () {
 			return {
 				searchValue: ""
@@ -21529,8 +21560,7 @@
 					type: "text",
 					onChange: this.onChange,
 					onKeyDown: this.onKey,
-					value: this.state.searchValue }),
-				React.createElement(Results, null)
+					value: this.state.searchValue })
 			);
 		},
 
@@ -21547,6 +21577,7 @@
 					searchValue: ""
 				});
 			}
+			this.props.onSearch(this.props.character);
 		}
 	});
 
@@ -21565,6 +21596,9 @@
 		displayName: "Results",
 
 
+		// results = <Results 
+		// 		onSelect={this.onSelect}/>;
+
 		getInitialState: function () {
 			return {
 				searchResults: characterStore.get()
@@ -21581,10 +21615,13 @@
 		},
 
 		render: function () {
+			var _this = this;
 			var characters = this.state.searchResults.map(function (character) {
 				return React.createElement(Character, {
 					name: character.name,
-					key: character.id });
+					key: character.id,
+					id: character.id,
+					onChoose: _this.props.onChoose });
 			});
 
 			return React.createElement(
@@ -21607,16 +21644,23 @@
 		displayName: "Character",
 
 
-		// <Character 
+		// <Character
 		// name={character.name}
 		// key={character.id}
+		// id={character.id}
+		// onChoose={this.props.onSelect} />
+		// );
 
 		render: function () {
 			return React.createElement(
 				"div",
-				null,
+				{ onClick: this.handleClick },
 				this.props.name
 			);
+		},
+
+		handleClick: function () {
+			this.props.onChoose(this.props.id);
 		}
 	});
 
@@ -21635,8 +21679,12 @@
 	var apiKey = "dcbc47e11153905633e8b3d927ab2639";
 	var characters = [];
 
-	characterStore.get = function () {
-		return characters;
+	characterStore.get = function (id) {
+		if (id) {
+			return characters.find(character => character.id === id);
+		} else {
+			return characters;
+		}
 	};
 
 	characterStore.fetch = function (search) {
