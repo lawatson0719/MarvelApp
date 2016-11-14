@@ -15,9 +15,9 @@ var Battle = React.createClass({
 		}
 		this.props
 		return (
-			<div>
+			<ul>
 				{battle}
-			</div>
+			</ul>
 		);
 	}
 

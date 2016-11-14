@@ -21431,7 +21431,8 @@
 	var Battle = __webpack_require__(180);
 	var Results = __webpack_require__(175);
 	var characterStore = __webpack_require__(177);
-	var battleManager = __webpack_require__(181);
+	var battleStore = __webpack_require__(181);
+	var battleManager = __webpack_require__(182);
 
 	var App = React.createClass({
 		displayName: "App",
@@ -21545,6 +21546,8 @@
 					narrative: narrative,
 					displayResults: false
 				});
+				// Add battle log to battleStore
+				battleStore.add(narrative);
 			}
 		}
 
@@ -21679,7 +21682,7 @@
 			});
 
 			return React.createElement(
-				"div",
+				"ul",
 				null,
 				characters
 			);
@@ -21710,7 +21713,7 @@
 			// w/l
 			// thumbnail
 			return React.createElement(
-				"div",
+				"li",
 				{ onClick: this.handleClick },
 				React.createElement("img", { src: this.props.thumb, className: "thumb" }),
 				this.props.name,
@@ -23750,7 +23753,7 @@
 			}
 			this.props;
 			return React.createElement(
-				"div",
+				"ul",
 				null,
 				battle
 			);
@@ -23762,6 +23765,50 @@
 
 /***/ },
 /* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var EventEmitter = __webpack_require__(178);
+	var $ = __webpack_require__(179);
+
+	var battleStore = Object.create(EventEmitter.prototype);
+	EventEmitter.apply(battleStore);
+
+	var battleHistory = {
+		battles: [],
+		characters: []
+	};
+
+	battleStore.add = function (battle) {
+		battleHistory.battles.push(battle);
+		$.ajax({
+			url: "/api/battles/",
+			method: "POST",
+			data: battle,
+			success: function (results) {
+				console.log(results);
+			}
+		});
+	};
+
+	battleStore.get = function () {
+		return battleHistory;
+	};
+
+	battleStore.fetch = function () {
+		$.ajax({
+			url: "/api/battles/",
+			success: function (results) {
+				battleHistory = results;
+				console.log(results);
+			}
+		});
+	};
+
+	window.battleStore = battleStore;
+	module.exports = battleStore;
+
+/***/ },
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root,factory){if(true){!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));}else if(typeof exports==="object"){module.exports=factory();}else{root.BattleManager=factory();}})(this,function(){/**
