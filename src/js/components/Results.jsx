@@ -31,7 +31,8 @@ var Results = React.createClass({
 				name={character.name}
 				key={character.id}
 				id={character.id}
-				onChoose={_this.props.onChoose} />
+				onChoose={_this.props.onChoose}
+				thumb={character.thumbnail.path + "." + character.thumbnail.extension} />
 				);
 		})
 

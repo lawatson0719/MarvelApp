@@ -44,6 +44,14 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// TODO
+	// 1. Implement battle function
+	// 2. Battle component
+	// 3. Display all relevant character information
+	// 4. Set up server for battle history
+	// 5. Pull W/L from server into App
+
+
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(34);
 
@@ -21439,6 +21447,7 @@
 		},
 
 		render: function () {
+			// Load characters if available
 			var leftImage;
 			var rightImage;
 
@@ -21454,13 +21463,23 @@
 				rightImage = "";
 			}
 
+			// load results if search has been performed
+
 			var results;
 			if (this.state.displayResults) {
 				results = React.createElement(Results, {
 					onChoose: this.onSelect });
 			}
+
+			// Set state of fight button
+
+			var fightText = "Choose Your Combatants";
+			if (this.state.characterOne && this.state.characterTwo) {
+				fightText = "Fight";
+			}
+
 			return React.createElement(
-				"main",
+				"div",
 				null,
 				React.createElement(CharacterSelect, {
 					image: leftImage,
@@ -21476,8 +21495,8 @@
 				React.createElement("div", { className: "results" }),
 				React.createElement(
 					"button",
-					{ className: "fight-button" },
-					"fight"
+					{ className: "fight-button", onClick: this.fight },
+					fightText
 				),
 				React.createElement("div", { className: "results" }),
 				React.createElement(Search, { character: 2, onSearch: this.displayResults }),
@@ -21486,30 +21505,25 @@
 			);
 		},
 
-		selectLeft: function () {
-			this.setState({
-				selectedCharacter: 1
-			});
-		},
-
-		selectRight: function () {
-			this.setState({
-				selectedCharacter: 2
-			});
-		},
+		// Passed as prop into both searches and executed when search occurs
 
 		displayResults: function (which) {
+			// sets the selectedCharacter state to 1 or 2, to prep for loading 
 			this.setState({
 				selectedCharacter: which
 			});
+
+			// Displays the results component now that search has occured
 			this.setState({
 				displayResults: true
 			});
 		},
 
+		// Passed as prop into results --> character
+		// sets selectedCharacter to object in store by id (character that was selected)
+
 		onSelect: function (id) {
 			var character = characterStore.get(id);
-			console.log(character);
 			if (this.state.selectedCharacter === 1) {
 				this.setState({
 					characterOne: character
@@ -21518,6 +21532,14 @@
 				this.setState({
 					characterTwo: character
 				});
+			}
+		},
+
+		// Makes 'em fight
+
+		fight: function () {
+			if (this.state.characterOne && this.state.characterTwo) {
+				console.log("We're fighting!");
 			}
 		}
 
@@ -21545,7 +21567,7 @@
 		render: function () {
 			return React.createElement(
 				"div",
-				null,
+				{ className: "char-view" },
 				React.createElement("img", { src: this.props.image })
 			);
 		}
@@ -21647,7 +21669,8 @@
 					name: character.name,
 					key: character.id,
 					id: character.id,
-					onChoose: _this.props.onChoose });
+					onChoose: _this.props.onChoose,
+					thumb: character.thumbnail.path + "." + character.thumbnail.extension });
 			});
 
 			return React.createElement(
@@ -21678,10 +21701,15 @@
 		// );
 
 		render: function () {
+			// name
+			// w/l
+			// thumbnail
 			return React.createElement(
 				"div",
 				{ onClick: this.handleClick },
-				this.props.name
+				React.createElement("img", { src: this.props.thumb, className: "thumb" }),
+				this.props.name,
+				React.createElement("div", null)
 			);
 		},
 

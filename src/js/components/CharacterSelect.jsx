@@ -12,7 +12,7 @@ var CharacterSelect = React.createClass({
 
 	render: function () {
 		return ( 
-			<div>
+			<div className="char-view">
 				<img src={this.props.image} />
 			</div>
 		)
