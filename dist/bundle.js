@@ -21579,12 +21579,7 @@
 
 
 		render: function () {
-			return React.createElement(
-				"div",
-				{ className: "char-view" },
-				React.createElement("div", { className: "image", id: "left" }),
-				React.createElement("div", { className: "image", id: "right" })
-			);
+			return React.createElement("div", { id: this.props.id });
 		}
 	});
 
