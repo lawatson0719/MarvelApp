@@ -11,9 +11,6 @@ var port = 3000;
 
 app.use(bodyParser({limit:'50mb'}));	
 
-
-
-
 // __dirname is a string that reference the current directory
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/dist"));
@@ -21,10 +18,13 @@ app.use(express.static(__dirname + "/lib"));
 // Remove this wehen we start building our Sass.
 app.use(express.static(__dirname + "/src/css"));
 
+
+// Database stores both character data (W/L) and battle history
 db.defaults({
 	battles: [],
 	characters: []
 }).value();
+
 
 
 app.get("/api/characters", function (req, res) {
@@ -32,10 +32,10 @@ app.get("/api/characters", function (req, res) {
 })
 
 
+
 app.post("/api/battles", function (req, res) {
 	
 	var fightData = req.body;
-	// Add battle to battle log
 	
 	if (fightData.winner !== "draw") {
 
@@ -89,22 +89,15 @@ app.post("/api/battles", function (req, res) {
 	}
 
 	// Push created battlerecord
-
 	db.get("battles").push(battle).value();
 
+	// Send back created character data to battleStore
 	var letsReturn = {
 		winner: winner,
 		loser: loser
 	}
 	res.json(letsReturn);
 })
-
-
-
-
-// 	db.get("characters").push(characterOne).value();
-// 	db.get("characters").push(characterTwo).value();
-// })
 
 
 app.listen(port);
