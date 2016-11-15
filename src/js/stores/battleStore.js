@@ -4,13 +4,18 @@ var $ = require("jquery");
 var battleStore = Object.create(EventEmitter.prototype);
 EventEmitter.apply(battleStore);
 
+
+// Stores characters and their win/losses locally
 var battledCharacters = [];
 
-
+// Basic access method
 battleStore.get = function () {
 	return battledCharacters;
 }
 
+
+// .add is executed when battle occurs with battle results. Hands those results off to server to update database 
+// and then updates locally on success.
 battleStore.add = function (battle) {
 	$.ajax({
 		url: "/api/battles/",
@@ -36,7 +41,7 @@ battleStore.add = function (battle) {
 	})
 }
 
-
+// Requests character win/loss data from server
 battleStore.fetchCharacters = function () {
 	$.ajax({
 		url: "/api/characters/",
@@ -44,6 +49,7 @@ battleStore.fetchCharacters = function () {
 			battledCharacters = results;
 		}
 	})
+	return battledCharacters;
 }
 
 window.battleStore = battleStore;
