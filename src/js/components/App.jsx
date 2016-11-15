@@ -1,6 +1,5 @@
 var React = require("react");
 
-
 var CharacterSelect = require("./CharacterSelect.jsx");
 var Search = require("./Search.jsx");
 var Battle = require("./Battle.jsx");
@@ -12,13 +11,21 @@ var battleManager = require("battlemanager");
 
 var App = React.createClass({
 
-
 	getInitialState: function () {
 		return {
+			// State that tells app which character to load upon selection, set to 1 or 2 on search execution
 			selectingCharacter: null,
+
+			// State that tells app whether to display the results component, set to true on search execution
 			displayResults: false,
+
+			// Character object loaded left
 			characterOne: null,
+
+			// Character object loaded right
 			characterTwo: null,
+
+			// Battledata object loaded on battle completion
 			narrative: null
 		}
 	},
@@ -26,7 +33,6 @@ var App = React.createClass({
 
 	render: function () {
 		// Load characters if available
-
 		var leftImage;
 		var rightImage;
 
@@ -42,15 +48,13 @@ var App = React.createClass({
 			rightImage = "";
 		}
 
-
-		// load results if search has been performed
+		// Load results if search has been performed
 
 		var results;
 		if (this.state.displayResults) {
 			results = <Results 
 						onChoose={this.onSelect} />;
 		}
-
 
 		// Set state of fight button
 
@@ -59,7 +63,7 @@ var App = React.createClass({
 			fightText = "Fight";
 		}
 
-
+		// Renders everything
 
 		return (
 			<div>
@@ -79,8 +83,8 @@ var App = React.createClass({
 						<div id="container-right">
 							<CharacterSelect 
 								id="right"
-								image={leftImage}
-								selected={this.selectingCharacter === 1 ? true : false}
+								image={rightImage}
+								selected={this.selectingCharacter === 2 ? true : false}
 								/>
 						</div>
 					</section>
@@ -96,20 +100,21 @@ var App = React.createClass({
 		);
 	},
 
-	// Passed as prop into both searches and executed when search occurs
-
+	// displayResults method is passed into Search as callback and executed when search is performed
 	displayResults: function (which) {
-		// sets the selectingCharacter state to 1 or 2, to prep for loading 
-		// Displays the results component now that search has occured
 		this.setState({
+
+			// Sets the selectingCharacter state to 1 or 2, to prep for loading 
 			selectingCharacter: which,
+
+			// Displays the results component now that search has occured
 			displayResults: true
 		})
 
 	},
 
-	// Passed as prop into results --> character
-	// sets selectingCharacter to object in store by id (character that was selected)
+	// onSelect method is passed as prop into results --> character
+	// sets characterOne / characterTwo to object in store by id (character that was selected)
 
 	onSelect: function (id) {
 		var character = characterStore.get(id);
@@ -127,14 +132,13 @@ var App = React.createClass({
 	// Makes 'em fight
 
 	fight: function () {
-		// if (this.state.characterOne.id === this.state.characterTwo.id) {
-		// 	console.log("YOU CAN'T FIGHT THEY'RE THE SAME");
-		// 	return;
-		// }
+		if (this.state.characterOne.id === this.state.characterTwo.id) {
+			console.log("YOU CAN'T FIGHT THEY'RE THE SAME");
+			return;
+		}
 		if (this.state.characterOne && this.state.characterTwo) {
 			// battlemanager sometimes doesn't have ID's?
 			var narrative = battleManager.narrativeBattle({id: this.state.characterOne.id}, {id: this.state.characterTwo.id });
-			console.log(narrative);
 			this.setState({
 				narrative: narrative,
 				displayResults: false

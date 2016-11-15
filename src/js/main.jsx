@@ -3,7 +3,6 @@
 // -- Display W/L
 // -- Add Fade-ins for battle text
 // -- Add more documentation 
-// -- 
 
 
 var React = require("react");
