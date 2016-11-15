@@ -21574,11 +21574,7 @@
 
 
 		render: function () {
-			return React.createElement(
-				"div",
-				{ className: "char-view" },
-				React.createElement("img", { src: this.props.image })
-			);
+			return React.createElement("div", { id: this.props.id });
 		}
 	});
 
