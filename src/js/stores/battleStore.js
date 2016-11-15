@@ -20,7 +20,16 @@ battleStore.add = function (battle) {
 	$.ajax({
 		url: "/api/battles/",
 		method: "POST",
-		data: battle,
+		data: {
+			winner: {
+				id: battle.winner.id,
+				name: battle.winner.name
+			},
+			loser: {
+				id: battle.loser.id,
+				name: battle.loser.name
+			}
+		},
 		success: function (results) {
 			console.log(results);
 			var winner;
