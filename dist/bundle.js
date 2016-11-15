@@ -21489,34 +21489,22 @@
 					"div",
 					{ className: "container" },
 					React.createElement(
-						"section",
-						{ id: "image-left" },
-						React.createElement(
-							"div",
-							{ id: "container-left" },
-							React.createElement(CharacterSelect, {
-								id: "left",
-								image: leftImage,
-								selected: this.selectingCharacter === 1 ? true : false
-							})
-						)
-					)
-				),
-				React.createElement(
-					"div",
-					{ className: "container" },
+						"div",
+						{ id: "container-left" },
+						React.createElement(CharacterSelect, {
+							id: "left",
+							image: leftImage,
+							selected: this.selectingCharacter === 1 ? true : false
+						})
+					),
 					React.createElement(
-						"section",
-						{ id: "image-right" },
-						React.createElement(
-							"div",
-							{ id: "container-right" },
-							React.createElement(CharacterSelect, {
-								id: "right",
-								image: leftImage,
-								selected: this.selectingCharacter === 1 ? true : false
-							})
-						)
+						"div",
+						{ id: "container-right" },
+						React.createElement(CharacterSelect, {
+							id: "right",
+							image: leftImage,
+							selected: this.selectingCharacter === 1 ? true : false
+						})
 					)
 				),
 				React.createElement(Search, { character: 1, onSearch: this.displayResults }),

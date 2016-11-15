@@ -64,26 +64,20 @@ var App = React.createClass({
 		return (
 			<div>
 				<div className="container">
-					<section id="image-left">
-						<div id="container-left">
-							<CharacterSelect 
-								id="left"
-								image={leftImage}
-								selected={this.selectingCharacter === 1 ? true : false}
-								/>
-						</div>
-					</section>
-				</div>
-				<div className="container">
-					<section id="image-right">
-						<div id="container-right">
-							<CharacterSelect 
-								id="right"
-								image={leftImage}
-								selected={this.selectingCharacter === 1 ? true : false}
-								/>
-						</div>
-					</section>
+					<div id="container-left">
+						<CharacterSelect 
+							id="left"
+							image={leftImage}
+							selected={this.selectingCharacter === 1 ? true : false}
+							/>
+					</div>
+					<div id="container-right">
+						<CharacterSelect 
+							id="right"
+							image={leftImage}
+							selected={this.selectingCharacter === 1 ? true : false}
+							/>
+					</div>
 				</div>
 				<Search character={1} onSearch={this.displayResults} />
 				<div className="results"></div>
