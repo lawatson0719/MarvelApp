@@ -2,7 +2,6 @@
 // -- Add draw funtionality
 // -- Display W/L
 // -- Add Fade-ins for battle text
-// -- Finish battleStore
 // -- Add more documentation 
 // -- 
 

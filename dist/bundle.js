@@ -48,7 +48,6 @@
 	// -- Add draw funtionality
 	// -- Display W/L
 	// -- Add Fade-ins for battle text
-	// -- Finish battleStore
 	// -- Add more documentation 
 	// -- 
 
@@ -21430,11 +21429,11 @@
 
 	var CharacterSelect = __webpack_require__(173);
 	var Search = __webpack_require__(174);
-	var Battle = __webpack_require__(180);
-	var Results = __webpack_require__(175);
-	var characterStore = __webpack_require__(177);
-	var battleStore = __webpack_require__(181);
-	var battleManager = __webpack_require__(182);
+	var Battle = __webpack_require__(232);
+	var Results = __webpack_require__(230);
+	var characterStore = __webpack_require__(233);
+	var battleStore = __webpack_require__(239);
+	var battleManager = __webpack_require__(238);
 
 	var App = React.createClass({
 		displayName: "App",
@@ -21486,14 +21485,40 @@
 			return React.createElement(
 				"div",
 				null,
-				React.createElement(CharacterSelect, {
-					image: leftImage,
-					selected: this.selectingCharacter === 1 ? true : false
-				}),
-				React.createElement(CharacterSelect, {
-					image: rightImage,
-					selected: this.selectingCharacter === 2 ? true : false
-				}),
+				React.createElement(
+					"div",
+					{ className: "container" },
+					React.createElement(
+						"section",
+						{ id: "image-left" },
+						React.createElement(
+							"div",
+							{ id: "container-left" },
+							React.createElement(CharacterSelect, {
+								id: "left",
+								image: leftImage,
+								selected: this.selectingCharacter === 1 ? true : false
+							})
+						)
+					)
+				),
+				React.createElement(
+					"div",
+					{ className: "container" },
+					React.createElement(
+						"section",
+						{ id: "image-right" },
+						React.createElement(
+							"div",
+							{ id: "container-right" },
+							React.createElement(CharacterSelect, {
+								id: "right",
+								image: leftImage,
+								selected: this.selectingCharacter === 1 ? true : false
+							})
+						)
+					)
+				),
 				React.createElement(Search, { character: 1, onSearch: this.displayResults }),
 				React.createElement("div", { className: "results" }),
 				React.createElement(
@@ -21512,12 +21537,9 @@
 
 		displayResults: function (which) {
 			// sets the selectingCharacter state to 1 or 2, to prep for loading 
-			this.setState({
-				selectingCharacter: which
-			});
-
 			// Displays the results component now that search has occured
 			this.setState({
+				selectingCharacter: which,
 				displayResults: true
 			});
 		},
@@ -21541,13 +21563,14 @@
 		// Makes 'em fight
 
 		fight: function () {
-			if (this.state.characterOne.id === this.state.characterTwo.id) {
-				console.log("YOU CAN'T FIGHT THEY'RE THE SAME");
-				return;
-			}
+			// if (this.state.characterOne.id === this.state.characterTwo.id) {
+			// 	console.log("YOU CAN'T FIGHT THEY'RE THE SAME");
+			// 	return;
+			// }
 			if (this.state.characterOne && this.state.characterTwo) {
 				// battlemanager sometimes doesn't have ID's?
 				var narrative = battleManager.narrativeBattle({ id: this.state.characterOne.id }, { id: this.state.characterTwo.id });
+				console.log(narrative);
 				this.setState({
 					narrative: narrative,
 					displayResults: false
@@ -21596,8 +21619,8 @@
 
 	var React = __webpack_require__(1);
 
-	var Results = __webpack_require__(175);
-	var characterStore = __webpack_require__(177);
+	var Results = __webpack_require__(230);
+	var characterStore = __webpack_require__(233);
 
 	var Search = React.createClass({
 		displayName: "Search",
@@ -21647,13 +21670,68 @@
 	module.exports = Search;
 
 /***/ },
-/* 175 */
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 
-	var Character = __webpack_require__(176);
-	var characterStore = __webpack_require__(177);
+	var Character = __webpack_require__(231);
+	var characterStore = __webpack_require__(233);
 
 	var Results = React.createClass({
 		displayName: "Results",
@@ -21699,7 +21777,7 @@
 	module.exports = Results;
 
 /***/ },
-/* 176 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -21744,11 +21822,47 @@
 	module.exports = Character;
 
 /***/ },
-/* 177 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var EventEmitter = __webpack_require__(178);
-	var $ = __webpack_require__(179);
+	var React = __webpack_require__(1);
+
+	var Battle = React.createClass({
+		displayName: "Battle",
+
+
+		// <Battle narrative={this.state.narrative}/>
+
+
+		render: function () {
+			var battle;
+			if (this.props.narrative) {
+				battle = this.props.narrative.fightData.map(function (turn) {
+					return React.createElement(
+						"li",
+						null,
+						turn.message
+					);
+				});
+			}
+			this.props;
+			return React.createElement(
+				"ul",
+				null,
+				battle
+			);
+		}
+
+	});
+
+	module.exports = Battle;
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var EventEmitter = __webpack_require__(234);
+	var $ = __webpack_require__(235);
 
 	var characterStore = Object.create(EventEmitter.prototype);
 	EventEmitter.apply(characterStore);
@@ -21780,7 +21894,7 @@
 	module.exports = characterStore;
 
 /***/ },
-/* 178 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22089,7 +22203,7 @@
 	}
 
 /***/ },
-/* 179 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -23739,96 +23853,9 @@
 	if(!noGlobal){window.jQuery=window.$=jQuery;}return jQuery;});
 
 /***/ },
-/* 180 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-
-	var Battle = React.createClass({
-		displayName: "Battle",
-
-
-		// <Battle narrative={this.state.narrative}/>
-
-
-		render: function () {
-			var battle;
-			if (this.props.narrative) {
-				battle = this.props.narrative.fightData.map(function (turn) {
-					return React.createElement(
-						"li",
-						null,
-						turn.message
-					);
-				});
-			}
-			this.props;
-			return React.createElement(
-				"ul",
-				null,
-				battle
-			);
-		}
-
-	});
-
-	module.exports = Battle;
-
-/***/ },
-/* 181 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var EventEmitter = __webpack_require__(178);
-	var $ = __webpack_require__(179);
-
-	var battleStore = Object.create(EventEmitter.prototype);
-	EventEmitter.apply(battleStore);
-
-	var battledCharacters = [];
-
-	battleStore.get = function () {
-		return battledCharacters;
-	};
-
-	battleStore.add = function (battle) {
-		$.ajax({
-			url: "/api/battles/",
-			method: "POST",
-			data: battle,
-			success: function (results) {
-				console.log(results);
-				var winner;
-				var loser;
-				winner = battledCharacters.find(character => results.winner.id === character.id);
-				loser = battledCharacters.find(character => results.loser.id === character.id);
-				if (winner) {
-					winner.wins++;
-				} else {
-					battledCharacters.push(results.winner);
-				}
-				if (loser) {
-					loser.losses++;
-				} else {
-					battledCharacters.push(results.loser);
-				}
-			}
-		});
-	};
-
-	battleStore.fetch = function () {
-		$.ajax({
-			url: "/api/battles/",
-			success: function (results) {
-				battledCharacters = results;
-			}
-		});
-	};
-
-	window.battleStore = battleStore;
-	module.exports = battleStore;
-
-/***/ },
-/* 182 */
+/* 236 */,
+/* 237 */,
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root,factory){if(true){!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));}else if(typeof exports==="object"){module.exports=factory();}else{root.BattleManager=factory();}})(this,function(){/**
@@ -23916,6 +23943,59 @@
 	armorSaveRoll:function armorSaveRoll(wounds,attacker,defender,sides){return reduce(each(dice.toss(wounds.length,sides),function(thr,index,arr){return thr<defender.armor?1:0;}));},//constructs the event object for each attack and defense
 	//adds the object to the BattleManager data object
 	message:function message(type,attacker,defender,wounds){this.fightdata.push({"type":type,"attacker":attacker,"attackerName":attacker.name,"attackerWounds":attacker.wounds,"defender":defender,"defenderName":defender.name,"defenderWounds":defender.wounds,"message":messenger.message(type,attacker,defender),"wounds":wounds||null});}};function getId(fighter){var fighterId;if(typeof fighter==='number'||typeof fighter==='string'){fighterId=Number(fighter);}else if(typeof fighter==='object'&&'id'in fighter){fighterId=Number(fighter.id);}else{throw new Error('Fighter must be an object with "id" property or number.');}return fighterId;}function getStats(fighter){var id=getId(fighter);return stats.find(function(s){return s.id===id;});}return{narrativeBattle:function narrativeBattle(query1,query2){var fighter1Stats=getStats(query1),fighter2Stats=getStats(query2),fighter1=new Fighter(fighter1Stats),fighter2=new Fighter(fighter2Stats);return BattleManager.battle(fighter1,fighter2);},statBattle:function statBattle(query1,query2,count){var fighter1Stats=getStats(query1);var fighter2Stats=getStats(query2);var sample,returnObj={fighter1:{name:fighter1Stats.name,wins:0,draws:0},fighter2:{name:fighter2Stats.name,wins:0,draws:0},data:[]};for(var i=0;i<count;i++){sample=this.narrativeBattle(fighter1Stats,fighter2Stats);if(sample.winner==="draw"){returnObj.fighter1.draws+=1;returnObj.fighter2.draws+=1;}else{returnObj[sample.winner.name===returnObj.fighter1.name?"fighter1":"fighter2"].wins+=1;}returnObj.data.push(sample);}return returnObj;},addMessages:function(messages){messenger.messages=messages;}};});
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var EventEmitter = __webpack_require__(234);
+	var $ = __webpack_require__(235);
+
+	var battleStore = Object.create(EventEmitter.prototype);
+	EventEmitter.apply(battleStore);
+
+	var battledCharacters = [];
+
+	battleStore.get = function () {
+		return battledCharacters;
+	};
+
+	battleStore.add = function (battle) {
+		$.ajax({
+			url: "/api/battles/",
+			method: "POST",
+			data: battle,
+			success: function (results) {
+				console.log(results);
+				var winner;
+				var loser;
+				winner = battledCharacters.find(character => results.winner.id === character.id);
+				loser = battledCharacters.find(character => results.loser.id === character.id);
+				if (winner) {
+					winner.wins++;
+				} else {
+					battledCharacters.push(results.winner);
+				}
+				if (loser) {
+					loser.losses++;
+				} else {
+					battledCharacters.push(results.loser);
+				}
+			}
+		});
+	};
+
+	battleStore.fetchCharacters = function () {
+		$.ajax({
+			url: "/api/characters/",
+			success: function (results) {
+				battledCharacters = results;
+			}
+		});
+	};
+
+	window.battleStore = battleStore;
+	module.exports = battleStore;
 
 /***/ }
 /******/ ]);

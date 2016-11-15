@@ -27,8 +27,8 @@ db.defaults({
 }).value();
 
 
-app.get("/api/battles", function (req, res) {
-	res.json(db.get("battles").value());
+app.get("/api/characters", function (req, res) {
+	res.json(db.get("characters").value());
 })
 
 
@@ -40,13 +40,11 @@ app.post("/api/battles", function (req, res) {
 	if (fightData.winner !== "draw") {
 
 		var battle = {
+			draw: false,
 			winner: fightData.winner.name,
 			loser: fightData.loser.name,
 			id: shortid()
-		}
-
-		db.get("battles").push(battle).value();
-		
+		}		
 
 		// Update characters and their win rates
 		var winner = db.get("characters").find({id: fightData.winner.id});
@@ -82,17 +80,21 @@ app.post("/api/battles", function (req, res) {
 		}
 	} else {
 		var battle = {
-			winner: fightData.winner.name,
-			loser: fightData.loser.name,
+			draw: true,
+			winner: "none",
+			loser: "none",
 			id: shortid()
 		}
-
-		db.get("battles").push(battle).value();
+		
 	}
 
+	// Push created battlerecord
+
+	db.get("battles").push(battle).value();
+
 	var letsReturn = {
-		winner: fightData.winner,
-		loser: fightData.loser
+		winner: winner,
+		loser: loser
 	}
 	res.json(letsReturn);
 })

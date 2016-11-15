@@ -37,9 +37,9 @@ battleStore.add = function (battle) {
 }
 
 
-battleStore.fetch = function () {
+battleStore.fetchCharacters = function () {
 	$.ajax({
-		url: "/api/battles/",
+		url: "/api/characters/",
 		success: function (results) {
 			battledCharacters = results;
 		}

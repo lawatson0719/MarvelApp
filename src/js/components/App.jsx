@@ -63,21 +63,34 @@ var App = React.createClass({
 
 		return (
 			<div>
-				<CharacterSelect 
-					image={leftImage}
-					selected={this.selectingCharacter === 1 ? true : false}
-					/>
-				<CharacterSelect 
-					image={rightImage}
-					selected={this.selectingCharacter === 2 ? true : false}
-					/>
+				<div className="container">
+					<section id="image-left">
+						<div id="container-left">
+							<CharacterSelect 
+								id="left"
+								image={leftImage}
+								selected={this.selectingCharacter === 1 ? true : false}
+								/>
+						</div>
+					</section>
+				</div>
+				<div className="container">
+					<section id="image-right">
+						<div id="container-right">
+							<CharacterSelect 
+								id="right"
+								image={leftImage}
+								selected={this.selectingCharacter === 1 ? true : false}
+								/>
+						</div>
+					</section>
+				</div>
 				<Search character={1} onSearch={this.displayResults} />
 				<div className="results"></div>
 				<button className="fight-button" onClick={this.fight}>{fightText}</button>
 				<div className="results"></div>
 				<Search character={2} onSearch={this.displayResults} />
 				{results}
-
 				<Battle narrative={this.state.narrative}/>
 			</div>
 		);
@@ -87,14 +100,12 @@ var App = React.createClass({
 
 	displayResults: function (which) {
 		// sets the selectingCharacter state to 1 or 2, to prep for loading 
-		this.setState({
-			selectingCharacter: which
-		})
-
 		// Displays the results component now that search has occured
 		this.setState({
+			selectingCharacter: which,
 			displayResults: true
 		})
+
 	},
 
 	// Passed as prop into results --> character
@@ -116,13 +127,14 @@ var App = React.createClass({
 	// Makes 'em fight
 
 	fight: function () {
-		if (this.state.characterOne.id === this.state.characterTwo.id) {
-			console.log("YOU CAN'T FIGHT THEY'RE THE SAME");
-			return;
-		}
+		// if (this.state.characterOne.id === this.state.characterTwo.id) {
+		// 	console.log("YOU CAN'T FIGHT THEY'RE THE SAME");
+		// 	return;
+		// }
 		if (this.state.characterOne && this.state.characterTwo) {
 			// battlemanager sometimes doesn't have ID's?
 			var narrative = battleManager.narrativeBattle({id: this.state.characterOne.id}, {id: this.state.characterTwo.id });
+			console.log(narrative);
 			this.setState({
 				narrative: narrative,
 				displayResults: false
