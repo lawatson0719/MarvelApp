@@ -169,10 +169,9 @@ input[type="text"]{
 }
 
 
-/*.results-right input[type="text"] {
-	float: right;
-}*/
-
+.display-block {
+	display: block;
+}
 
 
 
