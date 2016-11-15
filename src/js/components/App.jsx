@@ -15,7 +15,7 @@ var App = React.createClass({
 
 	getInitialState: function () {
 		return {
-			selectedCharacter: null,
+			selectingCharacter: null,
 			displayResults: false,
 			characterOne: null,
 			characterTwo: null,
@@ -65,11 +65,11 @@ var App = React.createClass({
 			<div>
 				<CharacterSelect 
 					image={leftImage}
-					selected={this.selectedCharacter === 1 ? true : false}
+					selected={this.selectingCharacter === 1 ? true : false}
 					/>
 				<CharacterSelect 
 					image={rightImage}
-					selected={this.selectedCharacter === 2 ? true : false}
+					selected={this.selectingCharacter === 2 ? true : false}
 					/>
 				<Search character={1} onSearch={this.displayResults} />
 				<div className="results"></div>
@@ -86,9 +86,9 @@ var App = React.createClass({
 	// Passed as prop into both searches and executed when search occurs
 
 	displayResults: function (which) {
-		// sets the selectedCharacter state to 1 or 2, to prep for loading 
+		// sets the selectingCharacter state to 1 or 2, to prep for loading 
 		this.setState({
-			selectedCharacter: which
+			selectingCharacter: which
 		})
 
 		// Displays the results component now that search has occured
@@ -98,15 +98,15 @@ var App = React.createClass({
 	},
 
 	// Passed as prop into results --> character
-	// sets selectedCharacter to object in store by id (character that was selected)
+	// sets selectingCharacter to object in store by id (character that was selected)
 
 	onSelect: function (id) {
 		var character = characterStore.get(id);
-		if (this.state.selectedCharacter === 1) {
+		if (this.state.selectingCharacter === 1) {
 			this.setState({
 				characterOne: character
 			})
-		} else if (this.state.selectedCharacter === 2) {
+		} else if (this.state.selectingCharacter === 2) {
 			this.setState({
 				characterTwo: character
 			})	

@@ -45,7 +45,12 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// TODO
-	// 1. Add draw funtionality
+	// -- Add draw funtionality
+	// -- Display W/L
+	// -- Add Fade-ins for battle text
+	// -- Finish battleStore
+	// -- Add more documentation 
+	// -- 
 
 
 	var React = __webpack_require__(1);
@@ -21437,7 +21442,7 @@
 
 		getInitialState: function () {
 			return {
-				selectedCharacter: null,
+				selectingCharacter: null,
 				displayResults: false,
 				characterOne: null,
 				characterTwo: null,
@@ -21483,11 +21488,11 @@
 				null,
 				React.createElement(CharacterSelect, {
 					image: leftImage,
-					selected: this.selectedCharacter === 1 ? true : false
+					selected: this.selectingCharacter === 1 ? true : false
 				}),
 				React.createElement(CharacterSelect, {
 					image: rightImage,
-					selected: this.selectedCharacter === 2 ? true : false
+					selected: this.selectingCharacter === 2 ? true : false
 				}),
 				React.createElement(Search, { character: 1, onSearch: this.displayResults }),
 				React.createElement("div", { className: "results" }),
@@ -21506,9 +21511,9 @@
 		// Passed as prop into both searches and executed when search occurs
 
 		displayResults: function (which) {
-			// sets the selectedCharacter state to 1 or 2, to prep for loading 
+			// sets the selectingCharacter state to 1 or 2, to prep for loading 
 			this.setState({
-				selectedCharacter: which
+				selectingCharacter: which
 			});
 
 			// Displays the results component now that search has occured
@@ -21518,15 +21523,15 @@
 		},
 
 		// Passed as prop into results --> character
-		// sets selectedCharacter to object in store by id (character that was selected)
+		// sets selectingCharacter to object in store by id (character that was selected)
 
 		onSelect: function (id) {
 			var character = characterStore.get(id);
-			if (this.state.selectedCharacter === 1) {
+			if (this.state.selectingCharacter === 1) {
 				this.setState({
 					characterOne: character
 				});
-			} else if (this.state.selectedCharacter === 2) {
+			} else if (this.state.selectingCharacter === 2) {
 				this.setState({
 					characterTwo: character
 				});
@@ -21577,7 +21582,8 @@
 			return React.createElement(
 				"div",
 				{ className: "char-view" },
-				React.createElement("img", { src: this.props.image })
+				React.createElement("div", { className: "image", id: "left" }),
+				React.createElement("div", { className: "image", id: "right" })
 			);
 		}
 	});
@@ -23778,32 +23784,42 @@
 	var battleStore = Object.create(EventEmitter.prototype);
 	EventEmitter.apply(battleStore);
 
-	var battleHistory = {
-		battles: [],
-		characters: []
+	var battledCharacters = [];
+
+	battleStore.get = function () {
+		return battledCharacters;
 	};
 
 	battleStore.add = function (battle) {
-		battleHistory.battles.push(battle);
 		$.ajax({
 			url: "/api/battles/",
 			method: "POST",
 			data: battle,
 			success: function (results) {
 				console.log(results);
+				var winner;
+				var loser;
+				winner = battledCharacters.find(character => results.winner.id === character.id);
+				loser = battledCharacters.find(character => results.loser.id === character.id);
+				if (winner) {
+					winner.wins++;
+				} else {
+					battledCharacters.push(results.winner);
+				}
+				if (loser) {
+					loser.losses++;
+				} else {
+					battledCharacters.push(results.loser);
+				}
 			}
 		});
-	};
-
-	battleStore.get = function () {
-		return battleHistory;
 	};
 
 	battleStore.fetch = function () {
 		$.ajax({
 			url: "/api/battles/",
 			success: function (results) {
-				battleHistory = results;
+				battledCharacters = results;
 			}
 		});
 	};
