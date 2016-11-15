@@ -125,6 +125,18 @@ header {
 }
 
 
+#left img,
+#right img {
+	height: 415px;
+	width: 100%;
+	-webkit-transform: skew(-20deg);
+       -moz-transform: skew(-20deg);
+         -o-transform: skew(-20deg);
+    margin-left: 9%;
+    border: none;
+    outline: none;
+}
+
 
 
 

@@ -78,7 +78,7 @@ var App = React.createClass({
 					<div id="container-right">
 						<CharacterSelect 
 							id="right"
-							image={leftImage}
+							image={rightImage}
 							selected={this.selectingCharacter === 1 ? true : false}
 							/>
 					</div>
