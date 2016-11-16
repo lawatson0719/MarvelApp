@@ -1,7 +1,7 @@
 // TODO
 // -- Add draw funtionality
 // -- Display W/L
-// -- Add Fade-ins for battle text
+// -- Fade-ins for battle text only work once
 // -- Add more documentation 
 // -- Tell Battle to wipe current value if a new one is executed, or another search is performed or something.
 

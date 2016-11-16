@@ -139,10 +139,10 @@ var App = React.createClass({
 		if (this.state.characterOne && this.state.characterTwo) {
 			// battlemanager sometimes doesn't have ID's?
 			var narrative = battleManager.narrativeBattle({id: this.state.characterOne.id}, {id: this.state.characterTwo.id });
-			console.log(narrative);
 			this.setState({
 				narrative: narrative,
-				displayResults: false
+				displayResults: false,
+				selectingCharacter: null
 			})
 			// Add battle log to battleStore
 			battleStore.add(narrative);
