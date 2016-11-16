@@ -15,6 +15,15 @@ body {
 	background-image: url('../../Images/triangles/triangles.png')
 }
 
+.display-block {
+	display: block;
+}
+
+main {
+	clear: both;
+	overflow: visible;
+}
+
 
 /* --- HEADER --- */
 
@@ -72,28 +81,32 @@ header {
 /* --- Thumbnails --- */
 
 .thumb {
-	width: 150px;
-	height: 150px;
-	border-radius: 75px;
-
+	display: block;
+	width: 200px;
+	height: 200px;
+	-webkit-clip-path: polygon(43% 96%, 36% 85%, 19% 100%, 18% 79%, 4% 70%, 18% 55%, 0 41%, 18% 31%, 0 13%, 21% 16%, 23% 0%, 40% 13%, 52% 4%, 61% 15%, 84% 3%, 80% 24%, 100% 27%, 86% 48%, 97% 62%, 84% 70%, 92% 89%, 73% 84%, 66% 100%, 55% 87%);
+	clip-path: polygon(43% 96%, 36% 85%, 19% 100%, 18% 79%, 4% 70%, 18% 55%, 0 41%, 18% 31%, 0 13%, 21% 16%, 23% 0%, 40% 13%, 52% 4%, 61% 15%, 84% 3%, 80% 24%, 100% 27%, 86% 48%, 97% 62%, 84% 70%, 92% 89%, 73% 84%, 66% 100%, 55% 87%);
+	margin: 5px auto;
 }
 
 .char-name,
 .score {
 	color: #d7d7d7;
+	width: 100%;
+	text-align: center;
 }
 
 .char-list {
 	list-style-type: none;
 	float: left;
 	width: 25%;
-	display: block;
-	margin: 0 auto;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 
 /* --- Character Select View --- */
+
+
 
 .container {
 	margin-top: 30px;
@@ -119,7 +132,7 @@ header {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    
+    /*opacity: 0.5;*/
 }
 
 #container-left {
@@ -192,15 +205,14 @@ header {
 }
 
 
+<<<<<<< HEAD
 .display-block {
 	height: 20px !important;
 	opacity: 1 !important;
 }
+=======
+>>>>>>> working
 
-main {
-	clear: both;
-	overflow: visible;
-}
 
 
 
