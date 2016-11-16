@@ -3,7 +3,8 @@ var React = require("react");
 var BattleMessage = require("./BattleMessage.jsx");
 var Battle = React.createClass({
 	
-		// <Battle narrative={this.state.narrative} key={battleKey}/>
+	// <Battle narrative={this.state.narrative} key={battleKey} keyProp={battleKey}/>
+
 
 	render: function () {
 		var battle = [];
@@ -12,7 +13,7 @@ var Battle = React.createClass({
 				let message = <BattleMessage 
 								message={this.props.narrative.fightData[i].message}
 								delay={i*3}
-								key={this.props.key + String(i)}
+								key={this.props.keyProp + String(i)}
 								/>
 				battle.push(message)
 			}

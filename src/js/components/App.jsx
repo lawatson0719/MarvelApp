@@ -54,6 +54,8 @@ var App = React.createClass({
 		if (this.state.displayResults) {
 			results = <Results 
 						onChoose={this.onSelect} />;
+		} else {
+			results = <div></div>
 		}
 
 		// Set state of fight button
@@ -101,7 +103,7 @@ var App = React.createClass({
 					</div>
 				</section>
 				{results}
-				<Battle narrative={this.state.narrative} key={battleKey}/>
+				<Battle narrative={this.state.narrative} key={battleKey} keyProp={battleKey}/>
 			</div>
 		);
 	},
@@ -114,7 +116,10 @@ var App = React.createClass({
 			selectingCharacter: which,
 
 			// Displays the results component now that search has occured
-			displayResults: true
+			displayResults: true,
+
+			// Remove current battle if in progress
+			narrative: null
 		})
 
 	},
@@ -142,7 +147,7 @@ var App = React.createClass({
 			console.log("YOU CAN'T FIGHT THEY'RE THE SAME");
 			return;
 		}
-		if (this.state.characterOne && this.state.characterTwo) {
+		if (this.state.characterOne && this.state.characterTwo && !this.state.narrative) {
 			// battlemanager sometimes doesn't have ID's?
 			var narrative = battleManager.narrativeBattle({id: this.state.characterOne.id}, {id: this.state.characterTwo.id });
 			this.setState({

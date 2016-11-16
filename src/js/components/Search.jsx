@@ -43,8 +43,8 @@ var Search = React.createClass({
 			this.setState({
 				searchValue: ""
 			})
+			this.props.onSearch(this.props.character);
 		}
-		this.props.onSearch(this.props.character);
 	}
 });
 
