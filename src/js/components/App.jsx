@@ -112,6 +112,7 @@ var App = React.createClass({
 						<Search className="search-right" character={2} onSearch={this.displayResults} />
 					</div>
 				</section>
+				<div className="page-break"></div>
 				{results}
 				{battle}
 			</div>
