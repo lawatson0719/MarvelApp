@@ -31,7 +31,6 @@ battleStore.add = function (battle) {
 			}
 		},
 		success: function (results) {
-			console.log(results);
 			var winner;
 			var loser;
 			winner = battledCharacters.find((character) => results.winner.id === character.id);

@@ -169,7 +169,8 @@ input[type="text"] {
 }
 
 .display-block {
-	display: block;
+	height: 20px !important;
+	opacity: 1 !important;
 }
 
 

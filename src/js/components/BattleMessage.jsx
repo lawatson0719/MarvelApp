@@ -4,37 +4,34 @@ var React = require("react");
 var BattleMessage = React.createClass({
 	
 		// return <BattleMessage
-		 // message={turn.message} 
-		 // advance={this.nextMessage}/>
+		// message={turn.message} 
+		// advance={this.nextMessage}/>
 
 	getInitialState : function () {
 		return ({
-			displaying: false
-		})
-	},
-
-	componentDidMount : function () {
-		var _this = this;
-		window.getAnimationFrame(function() {
-			_this.setState({
-				className: this.state.className += " display-block"
-			})
+			className: ""
 		})
 	},
 
 	render: function () {
 		var style = {
-			"display": "none",
-			"transition": "display",
-			"transition-delay" : this.props.delay + "s"
+			"height": "0px",
+			"opacity": 0,
+			"transition": "height 1s, opacity 1s",
+			"transitionDelay" : this.props.delay + "s"
 		}
-		if (this.state.displaying) {
-			style.display = "block";
-		}
-		return <li style={style}>{this.props.message}</li>
+
+		return <li style={style} className={this.state.className}>{this.props.message}</li>
+	},
+
+	componentDidMount : function () {
+		var _this = this;
+		setTimeout(function () {
+			_this.setState({
+				className: _this.state.className += "display-block"
+			})
+		}, 0);
 	}
-
-
 });
 
 module.exports = BattleMessage;
