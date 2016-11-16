@@ -4,6 +4,8 @@ var CharacterSelect = require("./CharacterSelect.jsx");
 var Search = require("./Search.jsx");
 var Battle = require("./Battle.jsx");
 var Results = require("./Results.jsx");
+var Stats = require("./Stats.jsx");
+
 var characterStore = require("../stores/characterStore.js");
 var battleStore = require("../stores/battleStore.js");
 var battleManager = require("battlemanager");
@@ -34,16 +36,20 @@ var App = React.createClass({
 	render: function () {
 		// Load characters if available
 		var leftImage;
+		var leftStats;
 		var rightImage;
+		var rightStats;
 
 		if (this.state.characterOne) {
 			leftImage = this.state.characterOne.thumbnail.path + "." + this.state.characterOne.thumbnail.extension;
+			leftStats = <Stats character={this.state.characterOne.id} />
 		} else {
 			leftImage = "";
 		}
 
 		if (this.state.characterTwo) {
 			rightImage = this.state.characterTwo.thumbnail.path + "." + this.state.characterTwo.thumbnail.extension;
+			rightStats = <Stats character={this.state.characterTwo.id} />
 		} else {
 			rightImage = "";
 		}
@@ -66,8 +72,10 @@ var App = React.createClass({
 		}
 
 		// Generate key for battle component
+		var battle;
 		if (this.state.narrative) {
 			var battleKey = String(this.state.characterOne.id) + String(this.state.characterTwo.id);
+			battle = <Battle narrative={this.state.narrative} key={battleKey} keyProp={battleKey}/>;
 		}
 
 
@@ -89,7 +97,9 @@ var App = React.createClass({
 							image={rightImage}
 							selected={this.selectingCharacter === 1 ? true : false}
 							/>
-					</div>
+					</div>	
+					{leftStats}
+					{rightStats}
 				</div>
 				<section className="search-bar">
 					<div className="search-left">
@@ -103,7 +113,7 @@ var App = React.createClass({
 					</div>
 				</section>
 				{results}
-				<Battle narrative={this.state.narrative} key={battleKey} keyProp={battleKey}/>
+				{battle}
 			</div>
 		);
 	},
