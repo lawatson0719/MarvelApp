@@ -26,6 +26,7 @@ var Search = React.createClass({
 					type="text" 
 					onChange={this.onChange} 
 					onKeyDown={this.onKey}
+					placeholder="Search Superheroes"
 					value={this.state.searchValue} />
 			</div>
 		);

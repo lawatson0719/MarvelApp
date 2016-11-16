@@ -9,14 +9,25 @@ EventEmitter.apply(battleStore);
 var battledCharacters = [];
 
 // Basic access method
-battleStore.get = function () {
-	return battledCharacters;
+battleStore.get = function (id) {
+	console.log(id)
+	if (id) {
+		var character = battledCharacters.find((value) => value.id === id);
+		if (character) {
+			return character;
+		} else {
+			return null;
+		}
+	} else {
+		return battledCharacters;
+	}
 }
 
 
 // .add is executed when battle occurs with battle results. Hands those results off to server to update database 
 // and then updates locally on success.
 battleStore.add = function (battle) {
+	var _this = this;
 	$.ajax({
 		url: "/api/battles/",
 		method: "POST",
@@ -45,6 +56,7 @@ battleStore.add = function (battle) {
 			} else {
 				battledCharacters.push(results.loser);
 			}
+			_this.emit("update");
 		}
 	})
 }
