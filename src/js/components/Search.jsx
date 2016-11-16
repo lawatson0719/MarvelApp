@@ -28,6 +28,7 @@ var Search = React.createClass({
 					onKeyDown={this.onKey}
 					placeholder="Search Superheroes"
 					value={this.state.searchValue} />
+				<button onClick={this.handleClick}>Search</button>
 			</div>
 		);
 	},
@@ -40,6 +41,18 @@ var Search = React.createClass({
 
 	onKey: function (e) {
 		if (e.keyCode == 13) {
+			if (this.refs.searchInput.value) {
+				characterStore.fetch(this.refs.searchInput.value);
+				this.setState({
+					searchValue: ""
+				})
+				this.props.onSearch(this.props.character);
+			}
+		}
+	},
+
+	handleClick: function () {
+		if (this.refs.searchInput.value) {
 			characterStore.fetch(this.refs.searchInput.value);
 			this.setState({
 				searchValue: ""
@@ -47,6 +60,8 @@ var Search = React.createClass({
 			this.props.onSearch(this.props.character);
 		}
 	}
+
+
 });
 
 module.exports = Search;
