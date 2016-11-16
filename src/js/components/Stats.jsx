@@ -11,6 +11,7 @@ var Stats = React.createClass({
 	},
 
 	componentWillMount: function () {
+		console.log(this.props.character);
 		var _this = this;
 		battleStore.on("update", function () {
 			_this.setState({

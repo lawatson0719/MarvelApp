@@ -10,9 +10,9 @@ var battledCharacters = [];
 
 // Basic access method
 battleStore.get = function (id) {
-	console.log(id)
+	console.log(id);
 	if (id) {
-		var character = battledCharacters.find((value) => value.id === id);
+		var character = battledCharacters.find((value) => value.id == id);
 		if (character) {
 			return character;
 		} else {
