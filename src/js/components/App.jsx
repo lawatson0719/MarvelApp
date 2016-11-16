@@ -65,10 +65,10 @@ var App = React.createClass({
 		}
 
 		// Set state of fight button
+		var fightButton;
 
-		var fightText = "Choose Your Combatants";
 		if (this.state.characterOne && this.state.characterTwo) {
-			fightText = "Fight";
+			fightButton = <button className="fight-button" onClick={this.fight}>"Fight!"</button>
 		}
 
 		// Generate key for battle component
@@ -106,7 +106,7 @@ var App = React.createClass({
 						<Search character={1} onSearch={this.displayResults} />
 					</div>
 					<div className="results"></div>
-					<button className="fight-button" onClick={this.fight}>{fightText}</button>
+					{fightButton}
 					<div className="results"></div>
 					<div className="search-right">
 						<Search className="search-right" character={2} onSearch={this.displayResults} />
