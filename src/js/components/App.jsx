@@ -63,6 +63,12 @@ var App = React.createClass({
 			fightText = "Fight";
 		}
 
+		// Generate key for battle component
+		if (this.state.narrative) {
+			var battleKey = String(this.state.characterOne.id) + String(this.state.characterTwo.id);
+		}
+
+
 		// Renders everything
 
 		return (
@@ -95,7 +101,7 @@ var App = React.createClass({
 					</div>
 				</section>
 				{results}
-				<Battle narrative={this.state.narrative}/>
+				<Battle narrative={this.state.narrative} key={battleKey}/>
 			</div>
 		);
 	},
