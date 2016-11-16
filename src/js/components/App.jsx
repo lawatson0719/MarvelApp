@@ -83,11 +83,17 @@ var App = React.createClass({
 							/>
 					</div>
 				</div>
-				<Search character={1} onSearch={this.displayResults} />
-				<div className="results"></div>
-				<button className="fight-button" onClick={this.fight}>{fightText}</button>
-				<div className="results"></div>
-				<Search character={2} onSearch={this.displayResults} />
+				<section className="search-bar">
+					<div className="search-left">
+						<Search character={1} onSearch={this.displayResults} />
+					</div>
+					<div className="results"></div>
+					<button className="fight-button" onClick={this.fight}>{fightText}</button>
+					<div className="results"></div>
+					<div className="search-right">
+						<Search className="search-right" character={2} onSearch={this.displayResults} />
+					</div>
+				</section>
 				{results}
 				<Battle narrative={this.state.narrative}/>
 			</div>

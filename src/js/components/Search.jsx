@@ -21,6 +21,7 @@ var Search = React.createClass({
 		return (
 			<div>
 				<input 
+					className="search-results"
 					ref="searchInput" 
 					type="text" 
 					onChange={this.onChange} 
