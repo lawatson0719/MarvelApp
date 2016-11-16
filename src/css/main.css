@@ -72,8 +72,10 @@ header {
 /* --- Thumbnails --- */
 
 .thumb {
-	width: 50px;
-	height: 50px;
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
+
 }
 
 .char-name,
@@ -84,7 +86,10 @@ header {
 .char-list {
 	list-style-type: none;
 	float: left;
-	width: 20%	;
+	width: 25%;
+	display: block;
+	margin: 0 auto;
+	margin-top: 10px;
 }
 
 
@@ -161,26 +166,40 @@ header {
 
 .search-bar {
 	width: 100%;
+	height: 30px;
 	margin-top: 20px;
 	position: relative;
 }
 
 .search-left .search-results  {
 	position: absolute;
-	left: 0;
+	left: 30px;
 	top: 0;
 }
 
 .search-results  {
 	position: absolute;
-	right: 0;
+	right: 30px;
 	top: 0;
+}
+
+.fight-button {
+	position: absolute;
+	left: 42vw;
+	top: 0;
+	width: 195px;
+	height: 40px;
 }
 
 
 .display-block {
 	height: 20px !important;
 	opacity: 1 !important;
+}
+
+main {
+	clear: both;
+	overflow: visible;
 }
 
 
