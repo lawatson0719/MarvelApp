@@ -146,7 +146,8 @@ header {
 	display: block;
 	margin: 0 auto;
 	padding: 20px 0;
-	
+	height: 570px;
+	overflow: auto;
 }
 
 ul {
@@ -320,9 +321,24 @@ span {
 /* --- BATTLE FEED --- */
 
 
+
+.list li {
+    transition: height 1s 0s, opacity 1s;
+    background-color: #fff;
+    margin-top: 10px;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    box-shadow: 0px 5px 5px #888888;
+}
+
 .display-block {
-	height: 20px !important;
-	opacity: 1 !important;
+	height: 40px !important;
+    opacity: 1 !important;
+    line-height: 40px;
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
 }
 
 
