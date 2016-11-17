@@ -189,7 +189,8 @@ var App = React.createClass({
 			this.setState({
 				narrative: narrative,
 				displayResults: false,
-				selectingCharacter: null
+				selectingCharacter: null,
+				locked: false
 			})
 			// Add battle log to battleStore
 			battleStore.add(narrative);
