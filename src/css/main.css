@@ -38,9 +38,9 @@ small {
 	display: block;
 	background-color: #d7d7d7;
 	margin: 30px auto;
-	-ms-transform: skew(-50deg);
-    -webkit-transform: skew(-50deg);
-    transform: skew(-50deg);
+	-ms-transform: skew(-60deg);
+    -webkit-transform: skew(-60deg);
+    transform: skew(-60deg);
     background: repeating-linear-gradient( -55deg, #d7d7d7, #222 5px, #222 5px, #222 6px );
 }
 
@@ -51,7 +51,7 @@ small {
 
 header {
 	height: 160px;
-	width: 98%;
+	width: 97%;
 	margin: 0 auto;
 	margin-top: 30px;
 }
@@ -66,7 +66,7 @@ header {
 #title {
 	height: 130px;
 	line-height: 130px;
-	width: 73%;
+	width: 74%;
 	font-size: 48px;
 	padding-left: 265px;
 	text-transform: uppercase;
@@ -99,6 +99,7 @@ header {
 #logo {
 	border: 8px solid #000;
 	height: 100%;
+	width: 26%;
 }
 
 
@@ -190,10 +191,10 @@ ul {
 
 #container-left,
 #container-right {
-	width: 54vw;
-    height: 460px;
+	width: 52.5vw;
+    height: 435px;
     background: #d7d7d7;
-    top: 20px;
+    top: 32.5px;
     position: absolute;
     background-image: url('../Images/default-hero.png');
     background-position: center;
@@ -203,14 +204,14 @@ ul {
 }
 
 #container-left {
-    left: 10px;
+    left: 2%;
  	-webkit-clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 0% 100%);   
  	clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 0% 100%);   
 }
 
 
 #container-right {
-	right: 10px; 
+	right: 2%; 
 	background-color: #d7d7d7; 
 	-webkit-clip-path: polygon(100% 100%, 100% 0%, 20% 0%, 0% 100%);   
  	clip-path: polygon(100% 100%, 100% 0%, 20% 0%, 0% 100%);   
@@ -238,11 +239,9 @@ ul {
 }
 
 
-/* --- Search and Fight Button --- */
+/* --- Search and Fight Buttons --- */
 
-/*div.results {
-	float: left;
-}*/
+
 
 .search-bar {
 	width: 100%;
@@ -253,31 +252,78 @@ ul {
 
 .search-left .search-results  {
 	position: absolute;
-	left: 30px;
-	top: 0;
+    left: 30px;
+    top: 8px;
+    height: 42px;
+    width: 275px;
 }
 
 .search-results  {
 	position: absolute;
 	right: 30px;
-	top: 0;
+	top: 8px;
+	 height: 42px;
+    width: 275px;
 }
+
 
 .fight-button {
 	position: absolute;
-	left: 43vw;
-	top: 0;
-	width: 195px;
-	height: 40px;
+    left: 43vw;
+    top: 4px;
+    width: 195px;
+    height: 50px;
 }
+
+.search-left button {
+	position: absolute;
+    left: 325px;
+    top: 8px;
+    height: 42px;
+    width: 105px;
+}
+
+.search-right button {
+	position: absolute;
+	right: 325px;
+	top: 8px;
+	height: 42px;
+	width: 105px;
+}
+
+
+
+/* --- STATS - WINS/LOSSES --- */
+
+
+
+span {
+	color: #d7d7d7;
+}
+
+.left-stats {
+	float: left;
+	display: block;
+	margin-left: 2%;
+	margin-top: 8px;
+}
+
+.right-stats {
+	float: right;
+	display: block;
+	margin-right: 2%;
+	margin-top: 8px;
+}
+
+
+
+/* --- BATTLE FEED --- */
 
 
 .display-block {
 	height: 20px !important;
 	opacity: 1 !important;
 }
-
-
 
 
 

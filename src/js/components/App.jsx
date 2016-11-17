@@ -98,8 +98,8 @@ var App = React.createClass({
 							selected={this.selectingCharacter === 1 ? true : false}
 							/>
 					</div>	
-					{leftStats}
-					{rightStats}
+					<div className="left-stats">{leftStats}</div>
+					<div className="right-stats">{rightStats}</div>
 				</div>
 				<section className="search-bar">
 					<div className="search-left">
