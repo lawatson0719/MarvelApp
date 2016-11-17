@@ -1,7 +1,5 @@
 // TODO
 // -- Add draw funtionality
-// -- Add more documentation 
-// -- Search button for each input
 // -- Resultsview and Battleview replace each other as necessary
 
 
