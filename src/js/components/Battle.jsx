@@ -22,7 +22,7 @@ var Battle = React.createClass({
 			<section className="result-container cf">
 				<h2 className="result-name">Place Holder</h2>
 				<section className="list-container">
-					<div className ="list cf">
+					<div id="battle-list" className="list cf">
 						<ul>
 							{battle}
 						</ul>

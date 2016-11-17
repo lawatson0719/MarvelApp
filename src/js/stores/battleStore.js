@@ -63,10 +63,12 @@ battleStore.add = function (battle) {
 
 // Requests character win/loss data from server
 battleStore.fetchCharacters = function () {
+	var _this = this;
 	$.ajax({
 		url: "/api/characters/",
 		success: function (results) {
 			battledCharacters = results;
+			_this.emit("update");
 		}
 	})
 	return battledCharacters;

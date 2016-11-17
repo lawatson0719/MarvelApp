@@ -6,12 +6,11 @@ var Stats = React.createClass({
 
 	getInitialState: function () {
 		return {
-			character: battleStore.get(this.props.character)
+			character: battleStore.fetchCharacters()
 		}
 	},
 
 	componentWillMount: function () {
-		console.log(this.props.character);
 		var _this = this;
 		battleStore.on("update", function () {
 			_this.setState({
@@ -33,7 +32,7 @@ var Stats = React.createClass({
 
 		return (
 			<div>
-				<span>W : {wins}</span>
+				<span>W : {wins} / </span>
 				<span>L : {losses}</span>
 			</div>
 		);

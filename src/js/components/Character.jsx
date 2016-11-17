@@ -11,9 +11,6 @@ var Character = React.createClass({
 		// );
 
 	render: function () {
-		// name
-		// w/l
-		// thumbnail
 		return (
 			<li className="char-list" onClick={this.handleClick}>
 				<div className="char-name">{this.props.name}</div>
