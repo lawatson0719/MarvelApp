@@ -58,7 +58,7 @@ var App = React.createClass({
 		// Load results if search has been performed
 
 		var results;
-		if (this.state.displayResults) {
+		if (this.state.displayResults && !this.state.locked) {
 			results = <Results 
 						onChoose={this.onSelect} />;
 		} else {
@@ -70,7 +70,7 @@ var App = React.createClass({
 		var confirmButton;
 
 		if (this.state.characterOne && this.state.characterTwo) {
-			confirmButton = <button className="fight-button" onClick={this.confirm}>"Confirm?"</button>
+			confirmButton = <button className="fight-button" onClick={this.confirm}>Confirm</button>
 		}
 
 		if (this.state.locked) {

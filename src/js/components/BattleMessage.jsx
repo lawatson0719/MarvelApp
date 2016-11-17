@@ -21,14 +21,14 @@ var BattleMessage = React.createClass({
 			"transitionDelay" : this.props.delay + "s"
 		}
 
-		return <li style={style} className={this.state.className}>{this.props.message}</li>
+		return <li style={style} className="cf" className={this.state.className}>{this.props.message}</li>
 	},
 
 	componentDidMount : function () {
 		var _this = this;
 		setTimeout(function () {
 			_this.setState({
-				className: _this.state.className += "display-block"
+				className: _this.state.className += "display-block cf"
 			})
 		}, 0);
 	}

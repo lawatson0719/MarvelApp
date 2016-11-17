@@ -151,7 +151,6 @@ header {
 }
 
 ul {
-	background-color: #4a4a4a;
 	width: 90%;
 	/*height: 300px;*/
 	display: block;
@@ -270,26 +269,41 @@ ul {
 
 .fight-button {
 	position: absolute;
-    left: 43vw;
+    left: 42.5vw;
     top: 4px;
     width: 195px;
     height: 50px;
+    cursor: pointer;
+    outline: none;
+    background-color: red;
+    color: #d7d7d7;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    font-size: 30px;
 }
 
-.search-left button {
+.search-left button,
+.search-right button {
 	position: absolute;
-    left: 325px;
     top: 8px;
     height: 42px;
     width: 105px;
+    cursor: pointer;
+    outline: none;
+    background-color: #4a4a4a;
+    border: none;
+    color: #d7d7d7;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.search-left button {
+	left: 325px;
 }
 
 .search-right button {
-	position: absolute;
 	right: 325px;
-	top: 8px;
-	height: 42px;
-	width: 105px;
 }
 
 
@@ -322,20 +336,22 @@ span {
 
 
 
-.list li {
+#battle-list li {
     transition: height 1s 0s, opacity 1s;
     background-color: #fff;
     margin-top: 10px;
     width: 100%;
     margin: 0 auto;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     box-shadow: 0px 5px 5px #888888;
+    padding: 1.4em 0;
+    line-height: 1em
 }
 
 .display-block {
-	height: 40px !important;
+	height: 65px !important;
     opacity: 1 !important;
-    line-height: 40px;
+    line-height: 65px;
     margin: 5px 0;
     width: 100%;
     text-align: center;

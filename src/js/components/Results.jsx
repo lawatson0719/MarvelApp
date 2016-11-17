@@ -39,7 +39,7 @@ var Results = React.createClass({
 
 		return (
 			<section className="result-container cf">
-				<h2 className="result-name">Place Holder</h2>
+				<h2 className="result-name">Choose your combatant</h2>
 				<section className="list-container">
 					<div className ="list cf">
 						<ul>
