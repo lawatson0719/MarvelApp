@@ -27,6 +27,7 @@ var App = React.createClass({
 			// Character object loaded right
 			characterTwo: null,
 
+			locked: false,
 			// Battledata object loaded on battle completion
 			narrative: null
 		}
@@ -64,12 +65,27 @@ var App = React.createClass({
 			results = <div></div>
 		}
 
-		// Set state of fight button
+		// Set state of fight and confirm buttons
 		var fightButton;
+		var confirmButton;
 
 		if (this.state.characterOne && this.state.characterTwo) {
-			fightButton = <button className="fight-button" onClick={this.fight}>"Fight!"</button>
+			confirmButton = <button className="fight-button" onClick={this.confirm}>"Confirm?"</button>
 		}
+
+		if (this.state.locked) {
+			fightButton = <button className="fight-button" onClick={this.fight}>Fight!</button>
+		}
+
+		// Generate Search components 
+		var leftSearch;
+		var rightSearch;
+		if (!this.state.locked) {
+			leftSearch = <Search character={1} onSearch={this.displayResults} />;
+			rightSearch = <Search className="search-right" character={2} onSearch={this.displayResults} />;
+		}
+
+
 
 		// Generate key for battle component
 		var battle;
@@ -103,13 +119,14 @@ var App = React.createClass({
 				</div>
 				<section className="search-bar">
 					<div className="search-left">
-						<Search character={1} onSearch={this.displayResults} />
+						{leftSearch}
 					</div>
 					<div className="results"></div>
+					{confirmButton}
 					{fightButton}
 					<div className="results"></div>
 					<div className="search-right">
-						<Search className="search-right" character={2} onSearch={this.displayResults} />
+						{rightSearch}
 					</div>
 				</section>
 				<div className="page-break"></div>
@@ -152,6 +169,14 @@ var App = React.createClass({
 	},
 
 	// Makes 'em fight
+
+
+	confirm: function () {
+		this.setState({
+			locked: true
+		})
+	},
+
 
 	fight: function () {
 		if (this.state.characterOne.id === this.state.characterTwo.id) {

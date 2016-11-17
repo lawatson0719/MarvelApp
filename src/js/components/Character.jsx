@@ -18,7 +18,6 @@ var Character = React.createClass({
 			<li className="char-list" onClick={this.handleClick}>
 				<div className="char-name">{this.props.name}</div>
 				<img src={this.props.thumb} className="thumb" />
-				<div className="score">W/L</div>
 			</li>
 		);
 	},
