@@ -38,9 +38,16 @@ var Results = React.createClass({
 
 
 		return (
-			<ul>
-				{characters}
-			</ul>
+			<section className="result-container cf">
+				<h2 className="result-name">Place Holder</h2>
+				<section className="list-container">
+					<div className ="list cf">
+						<ul>
+							{characters}
+						</ul>
+					</div>
+				</section>
+			</section>
 		);
 	}
 });

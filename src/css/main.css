@@ -32,6 +32,19 @@ small {
 	color: #d7d7d7;
 }
 
+.page-break {
+	width: 95%;
+	height: 8px;
+	display: block;
+	background-color: #d7d7d7;
+	margin: 30px auto;
+	-ms-transform: skew(-50deg);
+    -webkit-transform: skew(-50deg);
+    transform: skew(-50deg);
+    background: repeating-linear-gradient( -55deg, #d7d7d7, #222 5px, #222 5px, #222 6px );
+}
+
+
 
 /* --- HEADER --- */
 
@@ -88,7 +101,10 @@ header {
 	height: 100%;
 }
 
+
 /* --- Thumbnails --- */
+
+
 
 .thumb {
 	display: block;
@@ -101,7 +117,7 @@ header {
 
 .char-name,
 .score {
-	color: #d7d7d7;
+	color: #4a4a4a;
 	width: 100%;
 	text-align: center;
 }
@@ -113,8 +129,27 @@ header {
 	padding-top: 20px;
 }
 
+.list-container {
+	background-color: #4a4a4a;
+	margin-bottom: 50px;
+	width: 96%;
+	display: block;
+	margin: 0 auto;
+	padding: 20px 0;
+	margin-bottom: 50px;
+}
+
+.list {
+	background-color: #d7d7d7;
+	width: 97%;
+	display: block;
+	margin: 0 auto;
+	padding: 20px 0;
+	
+}
+
 ul {
-	/*background-color: #000;*/
+	background-color: #4a4a4a;
 	width: 90%;
 	/*height: 300px;*/
 	display: block;
@@ -122,10 +157,18 @@ ul {
 	padding: 0;
 }
 
-li {
-	background-color: #4a4a4a;
-	/*margin: 10px 10px;*/
+.result-name {
+	text-align: center;
+    color: #9b9b9b;
+    margin: 0;
+    background-color: #000;
+    height: 60px;
+    line-height: 60px;
+    width: 96%;
+    margin: 0 auto;
+    text-transform: uppercase;
 }
+
 
 
 /* --- Character Select View --- */
@@ -235,9 +278,9 @@ li {
 }
 
 
-/* --- PAGE BREAKS --- */
 
-.page-break {}
+
+
 
 
 
